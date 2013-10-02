@@ -159,11 +159,25 @@
 	</div>
 	
 </div>
-<?php if ($model->confirmado == 0) {?>
-<div id="yw116"><div class="alert in alert-block fade alert-error"><strong>Importante!</strong> Una vez CONFIRMADA la planilla no se podra ACTUALIZAR.</div></div>
-<?php } else {?>
-<div id="yw118"><div class="alert in alert-block fade alert-error"><strong>Planilla confirmada!</strong> No se puede realizar modificaciones.</div></div>
-<?php }?>
+<p>
+  <?php if ($model->confirmado == 0) {
+	$this->widget(
+    'bootstrap.widgets.TbLabel',
+    array(
+        'type' => 'info',
+        'label' => 'Importante! Una vez CONFIRMADA la planilla no se podra ACTUALIZAR.',
+    )
+);?>
+  <?php } else {
+	$this->widget(
+    'bootstrap.widgets.TbLabel',
+    array(
+        'type' => 'inverse',
+        'label' => 'Planilla confirmada! No se puede realizar modificaciones.',
+    )
+);?>
+  <?php }?>
+</p>
 
 <div class='printableArea'>
   <p>

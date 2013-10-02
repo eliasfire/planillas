@@ -11,7 +11,8 @@
 </style>
 
 <div class="form wide">
-<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+<p>
+  <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'id'=>'planilla-form',
 	'enableAjaxValidation'=>false,
 	'method'=>'post',
@@ -20,7 +21,7 @@
 		'enctype'=>'multipart/form-data'
 		)	
 	)); ?>
-<?php	
+  <?php	
 	$this->widget('bootstrap.widgets.TbAlert', array(
     'block'=>true, // display a larger alert block?
     'fade'=>true, // use transitions?
@@ -30,32 +31,43 @@
     	'error'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'),
     ),
 ));?>
-
-
-	
-	<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+  
+  
+  
+  <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Datos de la Planila',
 	'headerIcon' => 'icon-th-list',
 	// when displaying a table, if we include bootstra-widget-table class
 	// the table will be 0-padding to the box
 	'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
-
-<div id="yw116"><div class="alert in alert-block fade alert-error"><strong>Importante!</strong> Campos con <span class="required">*</span> son requeridos.</div></div>
-<?php
+  
+  <!-- <div id="yw116"><div class="alert in alert-block fade alert-error"><strong>Importante!</strong> Campos con <span class="required">*</span> son requeridos.</div></div>
+ --><?php $this->widget(
+    'bootstrap.widgets.TbLabel',
+    array(
+        'type' => 'info',
+        // 'success', 'warning', 'important', 'info' or 'inverse'
+        'label' => 'Importante! Campos con * son requeridos.',
+    )
+);?>
+  <?php
      $this->widget('bootstrap.widgets.TbAlert'); 
 	echo $form->errorSummary(array_merge(array($model),$validatedDetalles));
 ?>
-
-<?php 
+</p>
+<p>
+  
+  <?php 
     $cs = Yii::app()->getClientScript();
 	$cs->registerCoreScript('jquery');
 	$cs->registerCoreScript('jquery.ui');
 	$cs->registerCssFile(Yii::app()->request->baseUrl.'/css/bootstrap/jquery-ui.css');?>	
-	
-	
+  
+  
+</p>
 <table class="linear" cellspacing="0" >
-<?php
+  <?php
 	
 	$detalleFormConfig = array(
 		  'elements'=>array(
@@ -110,12 +122,13 @@
 
 		));
 ?>
- 
+  
 </table>
 
-<?php $this->endWidget();?>
 
-<style type="text/css">
+  <?php $this->endWidget();?>
+  
+  <style type="text/css">
 table.tableizer-table {
 	border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;
 
@@ -130,22 +143,31 @@ table.tableizer-table {
     color: rgb(2, 2, 2);
 	font-weight: bold;
 }
-</style>
-
-<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+  </style>
+  
+  <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Actividades Obligatorias / Optativas',
 	'headerIcon' => 'icon-th-list',
 	'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
-	<div id="yw116">
+  <!--  <div id="yw116">
 	<div class="alert in alert-block fade alert-error">
 	 <strong>Importante!</strong> 
 	 Todos los campos con deben contener un valor. Completar con cero '0' si no hay valor en la planilla.
   	 </div>
-	</div>
-	
+	</div> -->
+ <p> <?php $this->widget(
+    'bootstrap.widgets.TbLabel',
+    array(
+        'type' => 'info',
+        // 'success', 'warning', 'important', 'info' or 'inverse'
+        'label' => 'Importante! Todos los campos con deben contener un valor. Completar con cero "0" si no hay valor en la planilla.',
+    )
+);?>
+</p>
+<p>&nbsp; </p>
 <table align="center" class="tableizer-table">
-<tr class="tableizer-firstrow">
+  <tr class="tableizer-firstrow">
 	<th bgcolor="#0066CC">&nbsp;</th>
 	<th bgcolor="#0066CC">Totales</th>
 	<th bgcolor="#0066CC">Varones</th>

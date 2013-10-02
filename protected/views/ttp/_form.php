@@ -28,7 +28,8 @@
 </style>
 
 <div class="form wide">
-<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+
+  <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'id'=>'planilla-form',
 	'enableAjaxValidation'=>false,
 	'method'=>'post',
@@ -37,7 +38,7 @@
 		'enctype'=>'multipart/form-data'
 		)	
 	)); ?>
-<?php	
+  <?php	
 	$this->widget('bootstrap.widgets.TbAlert', array(
     'block'=>true, // display a larger alert block?
     'fade'=>true, // use transitions?
@@ -47,34 +48,50 @@
     	'error'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'),
     ),
 ));?>
-
-
-	
-	<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+  
+  
+  
+  <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Itinerario Formativo',
 	'headerIcon' => 'icon-th-list',
 	// when displaying a table, if we include bootstra-widget-table class
 	// the table will be 0-padding to the box
 	'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
-
-<div id="yw116"><div class="alert in alert-block fade alert-error"><strong>Importante!</strong> ALUMNOS  EXCLUSIVAMENTE DE LOS   I.F.   POR SEXO,  SEGUN  ITINERARIO.
-<p>&nbsp; </p> Los alumnos que cursen módulos de  IF que integran un  TTP  no deben declararse en este cuadro.</div></div>
-
-<?php
+ <p> 
+  <?php $this->widget(
+    'bootstrap.widgets.TbLabel',
+    array(
+        'type' => 'info',
+        // 'success', 'warning', 'important', 'info' or 'inverse'
+        'label' => 'Importante! ALUMNOS  EXCLUSIVAMENTE DE LOS   I.F.   POR SEXO,  SEGUN  ITINERARIO.',
+    )
+);?>
+  <?php $this->widget(
+    'bootstrap.widgets.TbLabel',
+    array(
+        'type' => 'info',
+        // 'success', 'warning', 'important', 'info' or 'inverse'
+        'label' => 'Los alumnos que cursen módulos de  IF que integran un  TTP  no deben declararse en este cuadro.',
+    )
+);?>
+</p>
+<p>
+  <?php
      $this->widget('bootstrap.widgets.TbAlert'); 
 	echo $form->errorSummary(array_merge(array($model),$validatedDetalles));
 ?>
-
-<?php 
+  
+  <?php 
     $cs = Yii::app()->getClientScript();
 	$cs->registerCoreScript('jquery');
 	$cs->registerCoreScript('jquery.ui');
 	$cs->registerCssFile(Yii::app()->request->baseUrl.'/css/bootstrap/jquery-ui.css');?>	
-	
-	
+  
+  
+</p>
 <table class="linear" cellspacing="0" >
-<?php
+  <?php
 	
 	$detalleFormConfig = array(
 		  'elements'=>array(
@@ -123,7 +140,7 @@
 
 		));
 ?>
- 
+  
 </table>
 
 <?php $this->endWidget();?>
@@ -134,9 +151,36 @@
 	'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
 
-<div id="yw116"><div class="alert in alert-block fade alert-error"><strong>Importante!</strong> ALUMNOS  EXCLUSIVAMENTE DE LOS   T.T.P.   POR SEXO,  SEGUN  TRAYECTO.
+<!-- <div id="yw116"><div class="alert in alert-block fade alert-error"><strong>Importante!</strong> ALUMNOS  EXCLUSIVAMENTE DE LOS   T.T.P.   POR SEXO,  SEGUN  TRAYECTO.
 <p>&nbsp; </p> En el caso de que los alumnos opten por cursar más de un Trayecto Profesional, regístrelos en cada uno de ellos.
-<p>&nbsp; </p> Incluir en este cuadro a los alumnos que cursan módulos de  IF  que integran un  TTP.</div></div>
+<p>&nbsp; </p> Incluir en este cuadro a los alumnos que cursan módulos de  IF  que integran un  TTP.</div></div> -->
+ <p> 
+  <?php $this->widget(
+    'bootstrap.widgets.TbLabel',
+    array(
+        'type' => 'info',
+        // 'success', 'warning', 'important', 'info' or 'inverse'
+        'label' => 'Importante! ALUMNOS  EXCLUSIVAMENTE DE LOS   T.T.P.   POR SEXO,  SEGUN  TRAYECTO.',
+    )
+);?>
+  <?php $this->widget(
+    'bootstrap.widgets.TbLabel',
+    array(
+        'type' => 'info',
+        // 'success', 'warning', 'important', 'info' or 'inverse'
+        'label' => 'En el caso de que los alumnos opten por cursar más de un Trayecto Profesional, regístrelos en cada uno de ellos.',
+    )
+);?>
+  <?php $this->widget(
+    'bootstrap.widgets.TbLabel',
+    array(
+        'type' => 'info',
+        // 'success', 'warning', 'important', 'info' or 'inverse'
+        'label' => 'Incluir en este cuadro a los alumnos que cursan módulos de  IF  que integran un  TTP.',
+    )
+);?>
+</p>
+
 <?php
      $this->widget('bootstrap.widgets.TbAlert'); 
 	echo $form->errorSummary(array_merge(array($model),$validatedDetalles2));

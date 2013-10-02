@@ -153,21 +153,34 @@
 	</div>
 	
 </div>
-<?php if ($model->confirmado == 0) {?>
-<div id="yw116"><div class="alert in alert-block fade alert-error"><strong>Importante!</strong> Una vez CONFIRMADA la planilla no se podra ACTUALIZAR.</div></div>
-<?php } else {?>
-<div id="yw118"><div class="alert in alert-block fade alert-error"><strong>Planilla confirmada!</strong> No se puede realizar modificaciones.</div></div>
-<?php }?>
-
-<div class='printableArea'>
-<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+<p>
+  <?php if ($model->confirmado == 0) {
+	$this->widget(
+    'bootstrap.widgets.TbLabel',
+    array(
+        'type' => 'info',
+        'label' => 'Importante! Una vez CONFIRMADA la planilla no se podra ACTUALIZAR.',
+    )
+);?>
+  <?php } else {
+	$this->widget(
+    'bootstrap.widgets.TbLabel',
+    array(
+        'type' => 'inverse',
+        'label' => 'Planilla confirmada! No se puede realizar modificaciones.',
+    )
+);?>
+  <?php }?>
+</p>
+<p>
+  <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Datos de la Planilla',
 	'headerIcon' => 'icon-th-list',
 	// when displaying a table, if we include bootstra-widget-table class
 	// the table will be 0-padding to the box
 	'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
-<?php $this->widget('bootstrap.widgets.TbDetailView',array(
+  <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
 	'id_planilla',
@@ -209,17 +222,17 @@
 	
 		
 )); ?>
-<?php $this->endWidget();?>
-
-
-<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+  <?php $this->endWidget();?>
+  
+  
+  <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Detalle de la Planilla',
 	'headerIcon' => 'icon-th-list',
 	// when displaying a table, if we include bootstra-widget-table class
 	// the table will be 0-padding to the box
 	'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
-<?php 
+  <?php 
 $this->widget('bootstrap.widgets.TbGroupGridView', array(
     'type'=>'striped bordered condensed',
 	'dataProvider' => SecundarioPolimodal::model()->getGridDataProvider($model->id_planilla),
@@ -320,23 +333,16 @@ array(
 	),
 	'mergeColumns' => array('id_nivel','id_sala_ciclo_anio','id_turno','id_seccion','id_orientacion')
 ));?>
-<?php $this->endWidget();?>
-
-
-<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+  <?php $this->endWidget();?>
+  
+  
+  <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Cantidad de Secciones/Divisiones',
 	'headerIcon' => 'icon-th-list',
 	'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
- 
- <div id="yw116">
-	<div class="alert in alert-block fade alert-error">
-	 <strong>Importante!</strong> 
-	 Todos los campos con deben contener un valor. Completar con cero '0' si no hay valor en la planilla.
-  	 </div>
-	</div>
-	
- <style type="text/css">
+  
+  <style type="text/css">
 table.tableizer-table {
 	border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
@@ -351,10 +357,11 @@ table.tableizer-table {
 	color: #FFF;
 	font-weight: bold;
 }
-</style>
-
-	<table align="left" class="tableizer-table">
-		<tr>
+  </style>
+</p>
+<div class='printableArea'>
+  <table align="left" class="tableizer-table">
+	  <tr>
 			<td bgcolor="#0066CC"><span class="fff"><span class="blanco">TOTAL INDEPENDIENTES</span></span></td>
 			<td bgcolor="#0066CC" class="blanco"><span class="fff">TOTAL</span></td>
 		</tr>

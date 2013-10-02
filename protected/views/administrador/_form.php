@@ -37,8 +37,17 @@
 	'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
 
-<div id="yw116"><div class="alert in alert-block fade alert-error"><strong>Importante!</strong> Campos con <span class="required">*</span> son requeridos.</div></div>
-<?php
+<!-- <div id="yw116"><div class="alert in alert-block fade alert-error"><strong>Importante!</strong> Campos con <span class="required">*</span> son requeridos.</div></div>
+ -->
+ <?php $this->widget(
+    'bootstrap.widgets.TbLabel',
+    array(
+        'type' => 'info',
+        // 'success', 'warning', 'important', 'info' or 'inverse'
+        'label' => 'Importante! Campos con * son requeridos.',
+    )
+);?>
+ <?php
      $this->widget('bootstrap.widgets.TbAlert'); 
 	echo $form->errorSummary(array_merge(array($model),$validatedDetalles));
 ?>
@@ -165,12 +174,20 @@ table.tableizer-table {
 	'headerIcon' => 'icon-th-list',
 	'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
-	<div id="yw116">
+	<!--  <div id="yw116">
 	<div class="alert in alert-block fade alert-error">
 	 <strong>Importante!</strong> 
 	 Todos los campos con deben contener un valor. Completar con cero '0' si no hay valor en la planilla.
   	 </div>
-	</div>
+	</div> -->
+  <?php $this->widget(
+    'bootstrap.widgets.TbLabel',
+    array(
+        'type' => 'info',
+        // 'success', 'warning', 'important', 'info' or 'inverse'
+        'label' => 'Importante! Todos los campos con deben contener un valor. Completar con cero "0" si no hay valor en la planilla.',
+    )
+);?>
 	
 <table align="center" class="tableizer-table">
 <tr class="tableizer-firstrow">

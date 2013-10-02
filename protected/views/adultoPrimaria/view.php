@@ -142,21 +142,40 @@
 	</div>
 	
 </div>
-<?php if ($model->confirmado == 0) {?>
-<div id="yw116"><div class="alert in alert-block fade alert-error"><strong>Importante!</strong> Una vez CONFIRMADA la planilla no se podra ACTUALIZAR.</div></div>
-<?php } else {?>
-<div id="yw118"><div class="alert in alert-block fade alert-error"><strong>Planilla confirmada!</strong> No se puede realizar modificaciones.</div></div>
-<?php }?>
+<p>
+  <?php if ($model->confirmado == 0) {
 
-<div class='printableArea'>
-<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+	$this->widget(
+    'bootstrap.widgets.TbLabel',
+    array(
+        'type' => 'info',
+        'label' => 'Importante! Una vez CONFIRMADA la planilla no se podra ACTUALIZAR.',
+    )
+);?>
+  <!-- <div id="yw116"><div class="alert in alert-block fade alert-error"><strong>Importante!</strong> Una vez CONFIRMADA la planilla no se podra ACTUALIZAR.</div></div>
+ -->
+  <?php } else {
+
+	$this->widget(
+    'bootstrap.widgets.TbLabel',
+    array(
+        'type' => 'inverse',
+        'label' => 'Planilla confirmada! No se puede realizar modificaciones.',
+    )
+);?>
+  <!-- <div id="yw118"><div class="alert in alert-block fade alert-error"><strong>Planilla confirmada!</strong> No se puede realizar modificaciones.</div></div>
+ -->
+  <?php }?>
+</p>
+<p>
+  <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Datos de la Planilla',
 	'headerIcon' => 'icon-th-list',
 	// when displaying a table, if we include bootstra-widget-table class
 	// the table will be 0-padding to the box
 	'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
-<?php $this->widget('bootstrap.widgets.TbDetailView',array(
+  <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
 	'id_planilla',
@@ -198,17 +217,17 @@
 	
 		
 )); ?>
-<?php $this->endWidget();?>
-
-
-<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+  <?php $this->endWidget();?>
+  
+  
+  <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Detalle de la Planilla',
 	'headerIcon' => 'icon-th-list',
 	// when displaying a table, if we include bootstra-widget-table class
 	// the table will be 0-padding to the box
 	'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
-<?php 
+  <?php 
 $this->widget('bootstrap.widgets.TbGroupGridView', array(
     'type'=>'striped bordered condensed',
 	'dataProvider' => AdultoPrimaria::model()->getGridDataProvider($model->id_planilla),
@@ -273,9 +292,9 @@ $this->widget('bootstrap.widgets.TbGroupGridView', array(
 	),
 	'mergeColumns' => array('id_sala_ciclo_anio','id_turno','id_seccion')
 ));?>
-<?php $this->endWidget();?>
-
-<style type="text/css">
+  <?php $this->endWidget();?>
+  
+  <style type="text/css">
 table.tableizer-table {
 	border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;
 
@@ -290,16 +309,17 @@ table.tableizer-table {
 	color: rgb(2, 2, 2);
 	font-weight: bold;
 }
-</style>
+  </style>
 
 <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Cantidad de secciones / divisiones',
 	'headerIcon' => 'icon-th-list',
 	'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
-	
-<table align="center" class="tableizer-table">
-<tr class="tableizer-firstrow">
+</p>
+<div class='printableArea'>
+  <table align="center" class="tableizer-table">
+  <tr class="tableizer-firstrow">
 	<th>&nbsp;</th>
 	<th>Totales</th>
 	<th>Alfabetización</th>
