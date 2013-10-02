@@ -1,0 +1,128 @@
+.tabla-view
+{
+	padding: 18px 0;
+}
+
+.tabla-view table.items
+{
+	background: white;
+	border-collapse: collapse;
+	width: 100%;
+	border: 1px #D0E3EF solid;
+}
+
+.tabla-view table.items th, .tabla-view table.items td
+{
+	font-size: 0.9em;
+	border: 1px white solid;
+	padding: 0.3em;
+}
+
+.tabla-view table.items th
+{
+	color: white;
+	background: #32F;
+	text-align: center;
+}
+
+.tabla-view table.items th a
+{
+	color: #EEE;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.tabla-view table.items th a:hover
+{
+	color: #FFF;
+}
+
+.tabla-view table.items th a.asc
+{
+	background:url right center no-repeat;
+	padding-right: 10px;
+}
+
+.tabla-view table.items th a.desc
+{
+	background:right center no-repeat;
+	padding-right: 10px;
+}
+
+.tabla-view table.items tr.titulos
+{
+	background:#3F93C0;
+	color:white;
+	text-align:center;
+	font-weight:bold;
+}
+
+.tabla-view table.items tr.even
+{
+	background: #F8F8F8;
+}
+
+.tabla-view table.items tr.odd
+{
+	background: #E5F1F4;
+}
+
+.tabla-view table.items tr.selected
+{
+	background: #BCE774;
+}
+
+.tabla-view table.items tr:hover
+{
+	background: #ECFBD4;
+}
+
+.tabla-view table.items tr.titulos:hover
+{
+	background: #0524A2;
+}
+
+.tabla-view .link-column img
+{
+	border: 0;
+}
+
+.tabla-view .button-column
+{
+	text-align: center;
+	width: 60px;
+}
+
+.tabla-view .button-column img
+{
+	border: 0;
+}
+
+.tabla-view .checkbox-column
+{
+	width: 15px;
+}
+
+.tabla-view .summary
+{
+	margin: 0 0 5px 0;
+	text-align: right;
+}
+
+.tabla-view .pager
+{
+	margin: 5px 0 0 0;
+	text-align: right;
+}
+
+.tabla-view .empty
+{
+	font-style: italic;
+}
+
+.tabla-view .filters input,
+.tabla-view .filters select
+{
+	width: 100%;
+	border: 1px solid #ccc;
+}

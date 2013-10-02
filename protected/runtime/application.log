@@ -1,0 +1,198 @@
+2012/07/26 05:29:29 [error] [exception.CException] exception 'CException' with message 'CAssetManager.basePath "C:\xampp\htdocs\ciudadEducativa\assets" es inválido. Verifique que el directorio exista y tenga permisos de escritura por el proceso que corre el servidor Web.' in C:\xampp\htdocs\yii\framework\web\CAssetManager.php:116
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CAssetManager.php(101): CAssetManager->setBasePath('C:\xampp\htdocs...')
+#1 C:\xampp\htdocs\yii\framework\web\CAssetManager.php(219): CAssetManager->getBasePath()
+#2 C:\xampp\htdocs\ciudadEducativa\protected\views\layouts\main.php(30): CAssetManager->publish('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#5 C:\xampp\htdocs\yii\framework\web\widgets\CContentDecorator.php(77): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#6 C:\xampp\htdocs\yii\framework\web\widgets\CContentDecorator.php(55): CContentDecorator->decorate('<div class="con...')
+#7 C:\xampp\htdocs\yii\framework\web\widgets\COutputProcessor.php(45): CContentDecorator->processOutput('<div class="con...')
+#8 C:\xampp\htdocs\yii\framework\web\CBaseController.php(207): COutputProcessor->run()
+#9 C:\xampp\htdocs\yii\framework\web\CBaseController.php(301): CBaseController->endWidget('CContentDecorat...')
+#10 C:\xampp\htdocs\ciudadEducativa\protected\views\layouts\column1.php(11): CBaseController->endContent()
+#11 C:\xampp\htdocs\yii\framework\web\CBaseController.php(127): require('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\yii\framework\web\CBaseController.php(96): CBaseController->renderInternal('C:\xampp\htdocs...', Array, true)
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(785): CBaseController->renderFile('C:\xampp\htdocs...', Array, true)
+#14 C:\xampp\htdocs\ciudadEducativa\protected\controllers\SiteController.php(32): CController->render('index')
+#15 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(50): SiteController->actionIndex()
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(309): CInlineAction->runWithParams(Array)
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(287): CController->runAction(Object(CInlineAction))
+#18 C:\xampp\htdocs\yii\framework\web\CController.php(266): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(276): CController->run('')
+#20 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('')
+#21 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#22 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/ciudadEducativa/
+---
+2012/07/26 05:31:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "index"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('index')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/index
+---
+2012/07/27 03:58:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "index"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('index')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/index
+---
+2012/07/27 04:11:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "index"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('index')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/index
+---
+2012/07/27 04:11:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "index"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('index')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/index
+---
+2012/07/27 04:13:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "index"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('index')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/index
+---
+2012/07/27 04:15:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "index"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('index')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/index
+---
+2012/07/27 04:17:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "index"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('index')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/index
+---
+2012/07/27 04:21:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "index"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('index')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/index
+---
+2012/07/27 04:22:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "index"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('index')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/index
+---
+2012/07/27 04:22:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "index"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('index')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/index
+---
+2012/07/27 04:26:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "index"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('index')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/index
+---
+2012/07/27 04:26:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "index"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('index')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/index
+---
+2012/07/27 04:29:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "index"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('index')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/index
+---
+2012/07/27 04:31:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "index"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('index')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/index
+---
+2012/07/27 04:32:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "index"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('index')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/index
+---
+2012/07/27 04:32:07 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mysql.authassignment' doesn't exist. The SQL statement executed was: SELECT *
+FROM `AuthAssignment`
+WHERE userid=:userid.
+in C:\xampp\htdocs\ciudadEducativa\protected\modules\rights\components\RWebUser.php (43)
+in C:\xampp\htdocs\ciudadEducativa\protected\views\layouts\main.php (80)
+in C:\xampp\htdocs\ciudadEducativa\protected\views\layouts\column1.php (11)
+2012/07/27 04:33:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "index"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('index')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/index
+---
+2012/07/27 04:43:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "images/user/theboss.png"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('images/user/the...')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/images/user/theboss.png
+HTTP_REFERER=http://localhost/ciudadEducativa/index.php
+---
+2012/07/27 06:08:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "images/user/theboss.png"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('images/user/the...')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/images/user/theboss.png
+HTTP_REFERER=http://localhost/ciudadEducativa/index.php
+---
+2012/07/27 06:08:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "images/user/theboss.png"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('images/user/the...')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/images/user/theboss.png
+HTTP_REFERER=http://localhost/ciudadEducativa/user/listarAdmin
+---
+2012/07/27 06:11:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'No es posible resolver la solicitud "images/user/theboss.png"' in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(135): CWebApplication->runController('images/user/the...')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(162): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\ciudadEducativa\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/ciudadEducativa/images/user/theboss.png
+HTTP_REFERER=http://localhost/ciudadEducativa/user/listarAdmin
+---

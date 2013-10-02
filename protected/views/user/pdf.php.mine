@@ -1,0 +1,61 @@
+<?php
+$pdf = Yii::createComponent('application.extensions.MPDF53.mpdf');
+$html='
+
+		<table>
+			<tr class="principal">
+				<td colspan="2" align="center"><b>DATOS DEL USUARIO</b></td>
+			<tr>
+	
+			<tr class="odd">
+				<td> <b>Nombres</b> </td>
+				<td> '.$model->nombres.'</td>
+			</tr>
+	
+			<tr class="even">
+				<td> <b>Apellido Paterno</b> </td>
+				<td> '.$model->apellido_paterno.'</td>
+			</tr>
+	
+			<tr class="odd">
+				<td> <b>Apellido Materno</b> </td>
+				<td> '.$model->apellido_materno.'</td>
+			</tr>
+	
+			<tr class="even">
+				<td> <b>RUN</b> </td>
+				<td> '.$model->run.'</td>
+			</tr>
+		
+			<tr class="odd">
+				<td> <b>Usuario</b> </td>
+				<td> '.$model->username.'</td>
+			</tr>
+	
+			<tr class="even">
+				<td> <b>Contraseña</b> </td>
+				<td> '.$model->password.'</td>
+			</tr>
+
+			<tr class="odd">
+				<td> <b>Nombre Tipo Informe</b> </td>
+				<td> '.$model->email.'</td>
+			</tr>
+		
+	
+		</table>';
+
+//$html1 = utf8_encode($html);
+
+$header=$header.'<img src="'.Yii::app()->request->baseUrl.'/images/log.jpg"/>';
+$mpdf=new mPDF('utf-8', array(190,236));
+
+//$stylesheet=$stylesheet.'<link rel="'.Yii::app()->request->baseUrl.'/css/pdf.css">';
+//$mpdf->WriteHTML($stylesheet,1);
+
+$mpdf->SetHTMLHeader($header);
+$mpdf->SetFooter(' {DATE j/m/Y}|Página {PAGENO}/{nbpg}|Sistema de Usuarios');
+$mpdf->WriteHTML($html);
+$mpdf->Output(''.$model->email.'.pdf','D');
+exit;
+?>

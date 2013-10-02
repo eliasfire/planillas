@@ -1,0 +1,21 @@
+INSERT INTO public.authassignment
+    (itemname, userid, bizrule, data)
+Select
+  'Ingresador',"public.user".id,NULL,'N;'
+From
+  public.user "public.user"
+  where "public.user".id not in (select userid from authassignment)
+
+//insertar usuarios con establecimientos
+INSERT INTO usu_est_pla(
+            id_usuario, id_establecimiento, username)
+SELECT DISTINCT 
+  public."user".id,
+  public.establecimiento.id_establecimiento,
+  public.establecimiento.cue
+FROM
+  public.establecimiento
+  INNER JOIN public."user" ON (public.establecimiento.cue = public."user".username)
+WHERE
+  public.establecimiento.c_estado = 1 AND 
+  public.establecimiento.cue NOT IN (SELECT public.usu_est_pla.username FROM public.usu_est_pla)

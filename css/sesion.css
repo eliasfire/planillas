@@ -1,0 +1,93 @@
+#carbonForm{
+
+	background-color:#FAFBFC;
+	border:1px solid #080808;
+	margin:10px auto;
+	padding:10px;
+	width:450px;
+	
+	-moz-box-shadow:0 0 1px #444 inset;
+	-webkit-box-shadow:0 0 1px #444 inset;
+	box-shadow:0 0 1px #444 inset;
+}
+
+.fieldContainer{
+
+	background-color:#FAFBFC;
+	border:1px solid #B6D9FF;
+	padding:10px 5px;
+	
+	-moz-box-shadow:0 0 20px #0D5CB1 inset;
+	-webkit-box-shadow:0 0 20px #0D5CB1 inset;
+	box-shadow:0 0 20px #0D5CB1 inset;
+}
+
+#carbonForm,.fieldContainer{
+	/* Rounding the divs at once */
+	-moz-border-radius:12px;
+	-webkit-border-radius:12px;
+	border-radius:12px;
+}
+
+.formRow{
+	height:10px;
+	padding:20px;
+	position:relative;
+}
+
+.label{
+	float:left;
+	padding:0 20px 0 0;
+	text-align:right;
+	width:70px;
+}
+
+label{
+	font-family:Arial,Helvetica,sans-serif;
+	font-weight:bold;
+	color:#666666;
+	font-size:13px;
+	letter-spacing:1px;
+	line-height:20px;
+}
+
+.field{
+	float:left;
+}
+
+.field input{
+	/* The text boxes */
+	border:1px solid black;
+	color:#666666;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:15px;
+	padding:4px 5px;
+	outline:none;
+}
+
+.signupButton{
+	
+	text-align:center;
+	padding:10px 0 10px;
+}
+
+input:hover,
+input:focus{
+	-moz-box-shadow:0 0 8px darkblue;
+	-webkit-box-shadow:0 0 8px darkblue;
+	box-shadow:0 0 8px darkblue;
+}
+
+div  #carbonForm .errorMessage
+{
+	color: red;
+	font-size: 0.9em;
+}
+
+div #carbonForm div.error input,
+div #carbonForm select.error
+{
+	background: #FEE;
+	border-color: #C00;
+}
+

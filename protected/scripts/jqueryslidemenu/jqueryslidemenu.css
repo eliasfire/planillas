@@ -1,0 +1,95 @@
+.jqueryslidemenu
+{
+	font: bold 12px Verdana;
+	width: 100%;
+}
+.jqueryslidemenu UL
+{
+	margin: -1px;
+	padding: 5px;
+	list-style-type: none;
+}
+/*Top level list items*/
+.jqueryslidemenu UL LI
+{
+	position: relative;
+	display: inline;
+	float: left;
+}
+/*Top level menu link items style*/
+.jqueryslidemenu UL LI A
+{
+	display: block;
+	background: #518EF3;
+/*background of tabs (default state)*/
+	color: #FFFFFF;
+	padding: 8px 10px;
+	border-right: 1px solid #778;
+	color: #2D2B2B;
+	text-decoration: none;
+}
+* HTML .jqueryslidemenu UL LI A
+{
+/*IE6 hack to get sub menu links to behave correctly*/
+	display: inline-block;
+}
+.jqueryslidemenu UL LI A:link, .jqueryslidemenu UL LI A:visited
+{
+	color: #FFFFFF;
+}
+.jqueryslidemenu UL LI A:hover
+{
+	background: #0524A2;
+/*tab link background during hover state*/
+	color: #FFFFFF;
+	font-weight: bold;
+}
+/*1st sub level menu*/
+.jqueryslidemenu UL LI UL
+{
+	position: absolute;
+	left: 0;
+	display: block;
+	visibility: hidden;
+}
+/*Sub level menu list items (undo style from Top level List Items)*/
+.jqueryslidemenu UL LI UL LI
+{
+	display: list-item;
+	float: none;
+}
+/*All subsequent sub menu levels vertical offset after 1st level sub menu*/
+.jqueryslidemenu UL LI UL LI UL
+{
+	top: 0;
+}
+/*Sub level menu links style*/
+.jqueryslidemenu UL LI UL LI A
+{
+	font: normal 13px Verdana;
+	width: 160px;
+/*width of sub menus*/
+	padding: 5px;
+	margin: 0;
+	border-top-width: 0;
+	border-bottom: 1px solid #FFFFFF;
+}
+.jqueryslidemenuz UL LI UL LI A:hover
+{
+/*sub menus hover style*/
+	background: #0524A2;
+	color: #000000;
+}
+/*######### CSS classes applied to down and right arrow images  #########*/
+.downarrowclass
+{
+	position: absolute;
+	top: 12px;
+	right: 7px;
+}
+.rightarrowclass
+{
+	position: absolute;
+	top: 6px;
+	right: 5px;
+}

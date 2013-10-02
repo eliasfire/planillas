@@ -1,0 +1,209 @@
+.titulo
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	text-align: center;
+}
+.subtitulo
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	text-align: center;
+}
+.marco_imgen_esquema
+{
+	margin: 0 auto;
+	/*+placement:shift -12px 21px;*/
+	position: relative;
+	left: -12px;
+	top: 21px;
+}
+.tabla
+{
+	/*+placement:shift 52px 64px;*/
+	position: relative;
+	left: 52px;
+	top: 64px;
+	line-height: 1.5;
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+.principal
+{
+	font-weight: bold;
+	background-color: #A4A4A4;
+	color: #0E0E0E;
+}
+TR.oscurita
+{
+	background-color: #A4A4A4;
+	color: #FFFFFF;
+}
+TR.odd
+{
+/*background-color : #BDBDBD;*/
+	background-color: #D8D8D8;
+	color: #0E0E0E;
+}
+TR.even
+{
+/*background-color : #BDBDBD;*/
+	background-color: #A4A4A4;
+	color: #FFFFFF;
+}
+.contador
+{
+	/*+placement:shift 23px 59px;*/
+	position: relative;
+	left: 23px;
+	top: 59px;
+	font-weight: bold;
+}
+.marco
+{
+	-webkit-border-radius: 1em;
+	background-color: #DCC7C7;
+}
+.firma
+{
+	/*+placement:shift 671px -2px;*/
+	position: absolute;
+	left: 450px;
+	top: 720px;
+}
+.firma2
+{
+	/*+placement:shift 23px 11px;*/
+	position: absolute;
+	left: 80px;
+	top: 720px;
+}
+.alumno
+{
+	/*+border-radius:2em 2em 5em 5em;*/
+	-moz-border-radius: 2em 2em 5em 5em;
+	-webkit-border-radius: 2em 2em 5em 5em;
+	-khtml-border-radius: 2em 2em 5em 5em;
+	border-radius: 2em 2em 5em 5em;
+	width: 560px;
+	height: 300px;
+	-webkit-border-radius: 9px;
+	-moz-border-radius: 9px;
+	border-radius: 9px;
+	border: 1px solid #071017;
+	background: rgba(227, 219, 218, 0);
+	-webkit-box-shadow: #B3B3B3 7px 7px 7px;
+	-moz-box-shadow: #B3B3B3 7px 7px 7px;
+	box-shadow: 7px 7px 7px #B3B3B3;
+}
+.padre
+{
+	/*+border-radius:2em 2em 5em 5em;*/
+	-moz-border-radius: 2em 2em 5em 5em;
+	-webkit-border-radius: 2em 2em 5em 5em;
+	-khtml-border-radius: 2em 2em 5em 5em;
+	border-radius: 2em 2em 5em 5em;
+	width: 560px;
+	height: 150px;
+	-webkit-border-radius: 9px;
+	-moz-border-radius: 9px;
+	border-radius: 9px;
+	border: 1px solid #071017;
+	background: rgba(227, 219, 218, 0);
+	-webkit-box-shadow: #B3B3B3 7px 7px 7px;
+	-moz-box-shadow: #B3B3B3 7px 7px 7px;
+	box-shadow: 7px 7px 7px #B3B3B3;
+}
+.madre
+{
+	/*+border-radius:2em 2em 5em 5em;*/
+	-moz-border-radius: 2em 2em 5em 5em;
+	-webkit-border-radius: 2em 2em 5em 5em;
+	-khtml-border-radius: 2em 2em 5em 5em;
+	border-radius: 2em 2em 5em 5em;
+	width: 560px;
+	height: 150px;
+	-webkit-border-radius: 9px;
+	-moz-border-radius: 9px;
+	border-radius: 9px;
+	border: 1px solid #071017;
+	background: rgba(227, 219, 218, 0);
+	-webkit-box-shadow: #B3B3B3 7px 7px 7px;
+	-moz-box-shadow: #B3B3B3 7px 7px 7px;
+	box-shadow: 7px 7px 7px #B3B3B3;
+}
+.registro
+{
+	/*+placement:shift 469px -151px;*/
+	position: relative;
+	left: 469px;
+	top: -151px;
+}
+.info
+{
+	font-family: Tahoma;
+	font-size: 10px;
+	line-height: 0.1;
+}
+.imagen
+{
+	/*+placement:shift 843px 8px;*/
+	position: relative;
+	left: 843px;
+	top: 8px;
+}
+.titulo_cert
+{
+	font-family: Arial;
+	font-size: 16px;
+	font-weight: bold;
+}
+.subtitulo_cert
+{
+	font-family: Arial;
+	font-size: 14px;
+	font-weight: bold;
+}
+.encabezado
+{
+	/*+placement:shift 27px -21px;*/
+	position: relative;
+	left: 27px;
+	top: -21px;
+	text-align: center;
+}
+.tabla_datos
+{
+	/*+border-radius:2em 2em 5em 5em;*/
+	-moz-border-radius: 2em 2em 5em 5em;
+	-webkit-border-radius: 2em 2em 5em 5em;
+	-khtml-border-radius: 2em 2em 5em 5em;
+	border-radius: 2em 2em 5em 5em;
+	width: 546px;
+	height: 251px;
+	/*+placement:shift 30px 264px;*/
+	position: relative;
+	left: 30px;
+	top: 264px;
+	left: 100px;
+	position: absolute;
+}
+.datos
+{
+	font-family: Georgia;
+	font-size: 12px;
+	position: absolute;
+	left: 300px;
+	top: 50px;
+}
+.img
+{
+	/*+placement:shift 905px 124px;*/
+	position: relative;
+	left: 905px;
+	top: 124px;
+	position: absolute;
+	left: 600px;
+	top: 7px;
+}
