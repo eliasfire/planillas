@@ -264,7 +264,7 @@ abstract class BaseTtp extends GxActiveRecord {
 	public function calcularMujeres($id)
 	{
 		
-		$items=ServicioComplementario::model()->findAll(array('condition'=>'id_planilla=:x', 'params'=>array(':x'=>$id)));
+		$items=Ttp::model()->findAll(array('condition'=>'id_planilla=:x', 'params'=>array(':x'=>$id)));
 			
 			foreach($items as $i=>$item)
 			{

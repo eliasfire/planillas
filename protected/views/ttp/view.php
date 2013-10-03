@@ -150,7 +150,7 @@
 	                $this->widget("bootstrap.widgets.TbButton", array(
 	                		"label"=>Yii::t('app', 'Exportar a PDF'),'type' => 'danger',
 	                		"icon"=>"icon-edit icon-white",
-	                		"url"=>array("imprimirLocalizacion")
+	                		"url"=>array("PlanillaIfttp")
 	                ));
 				?>
 
@@ -233,91 +233,6 @@
 	
 		
 )); ?>
-  <?php $this->endWidget();?>
-  
-  	<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
-	'title' => 'Itinerario Formativo',
-	'headerIcon' => 'icon-th-list',
-	'htmlOptions' => array('class'=>'bootstrap-widget-table')
-));?>
-
-  <?php 
-$this->widget('bootstrap.widgets.TbGroupGridView', array(
-    'type'=>'striped bordered condensed',
-	'dataProvider' => Itinerario::model()->getGridDataProvider($model->id_planilla),
-	'template' => "{items}",
-	//'extraRowColumns'=> array('id_localizacion'),
-	'columns' => array(
-		array(
-			'name'=>'nombre_itinerario',
-			'header'=>'Descripcion de Itinerario',
-		),
-        array(
-			'name'=>'id_turno',
-			'value'=>'GxHtml::valueEx($data->idTurno)',
-			'filter'=>GxHtml::listDataEx(Turno::model()->findAllAttributes(null, true)),
-			'footer'=>'Total Alumnos'),
-		array(
-			'name'=>'alu_mat_tot',
-	    	'header'=>'Total Alumnos',
-			'class'=>'bootstrap.widgets.TbTotalSumColumn'
-		),
-		array(
-			'name'=>'alu_mat_var',
-			'header'=>'Total Varones',
-			'class'=>'bootstrap.widgets.TbTotalSumColumn'
-		),
-		array(
-			'name'=>'alu_mat_muj',
-	    	'header'=>'Total Mujeres',
-			'class'=>'bootstrap.widgets.TbTotalSumColumn'
-		),			
-	),
-	'mergeColumns' => array('id_turno')
-));?>
-  <?php $this->endWidget();?>
-  
-   
-    
-<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
-	'title' => 'Trayecto Tecnico Profesional',
-	'headerIcon' => 'icon-th-list',
-	'htmlOptions' => array('class'=>'bootstrap-widget-table')
-));?>
-  <?php 
-$this->widget('bootstrap.widgets.TbGroupGridView', array(
-    'type'=>'striped bordered condensed',
-	'dataProvider' => Ttp::model()->getGridDataProvider($model->id_planilla),
-	'template' => "{items}",
-	//'extraRowColumns'=> array('id_localizacion'),
-	'columns' => array(
-		array(
-			'name'=>'nombre_ttp',
-			'header'=>'Descripcion de Ttp',
-		),
-        array(
-			'name'=>'id_turno',
-			'value'=>'GxHtml::valueEx($data->idTurno)',
-			'filter'=>GxHtml::listDataEx(Turno::model()->findAllAttributes(null, true)),
-			'footer'=>'Total Alumnos'),
-		array(
-			'name'=>'alu_mat_tot',
-	    	'header'=>'Total Alumnos',
-			'class'=>'bootstrap.widgets.TbTotalSumColumn'
-		),
-		array(
-			'name'=>'alu_mat_var',
-			'header'=>'Total Varones',
-			'class'=>'bootstrap.widgets.TbTotalSumColumn'
-		),
-		array(
-			'name'=>'alu_mat_muj',
-	    	'header'=>'Total Mujeres',
-			'class'=>'bootstrap.widgets.TbTotalSumColumn'
-		),			
-	),
-	'mergeColumns' => array('id_turno')
-));?>
   <?php $this->endWidget();?>
   
   <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
@@ -415,6 +330,93 @@ table.tableizer-table {
 
 	<p>
 	  <?php $this->endWidget();?>
+	  
+  	<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+	'title' => 'Itinerario Formativo',
+	'headerIcon' => 'icon-th-list',
+	'htmlOptions' => array('class'=>'bootstrap-widget-table')
+));?>
+
+  <?php 
+$this->widget('bootstrap.widgets.TbGroupGridView', array(
+    'type'=>'striped bordered condensed',
+	'dataProvider' => Itinerario::model()->getGridDataProvider($model->id_planilla),
+	'template' => "{items}",
+	//'extraRowColumns'=> array('id_localizacion'),
+	'columns' => array(
+		array(
+			'name'=>'nombre_itinerario',
+			'header'=>'Descripcion de Itinerario',
+		),
+        array(
+			'name'=>'id_turno',
+			'value'=>'GxHtml::valueEx($data->idTurno)',
+			'filter'=>GxHtml::listDataEx(Turno::model()->findAllAttributes(null, true)),
+			'footer'=>'Total Alumnos'),
+		array(
+			'name'=>'alu_mat_tot',
+	    	'header'=>'Total Alumnos',
+			'class'=>'bootstrap.widgets.TbTotalSumColumn'
+		),
+		array(
+			'name'=>'alu_mat_var',
+			'header'=>'Total Varones',
+			'class'=>'bootstrap.widgets.TbTotalSumColumn'
+		),
+		array(
+			'name'=>'alu_mat_muj',
+	    	'header'=>'Total Mujeres',
+			'class'=>'bootstrap.widgets.TbTotalSumColumn'
+		),			
+	),
+	'mergeColumns' => array('id_turno')
+));?>
+  <?php $this->endWidget();?>
+  
+   
+    
+<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+	'title' => 'Trayecto Tecnico Profesional',
+	'headerIcon' => 'icon-th-list',
+	'htmlOptions' => array('class'=>'bootstrap-widget-table')
+));?>
+  <?php 
+$this->widget('bootstrap.widgets.TbGroupGridView', array(
+    'type'=>'striped bordered condensed',
+	'dataProvider' => Ttp::model()->getGridDataProvider($model->id_planilla),
+	'template' => "{items}",
+	//'extraRowColumns'=> array('id_localizacion'),
+	'columns' => array(
+		array(
+			'name'=>'nombre_ttp',
+			'header'=>'Descripcion de Ttp',
+		),
+        array(
+			'name'=>'id_turno',
+			'value'=>'GxHtml::valueEx($data->idTurno)',
+			'filter'=>GxHtml::listDataEx(Turno::model()->findAllAttributes(null, true)),
+			'footer'=>'Total Alumnos'),
+		array(
+			'name'=>'alu_mat_tot',
+	    	'header'=>'Total Alumnos',
+			'class'=>'bootstrap.widgets.TbTotalSumColumn'
+		),
+		array(
+			'name'=>'alu_mat_var',
+			'header'=>'Total Varones',
+			'class'=>'bootstrap.widgets.TbTotalSumColumn'
+		),
+		array(
+			'name'=>'alu_mat_muj',
+	    	'header'=>'Total Mujeres',
+			'class'=>'bootstrap.widgets.TbTotalSumColumn'
+		),			
+	),
+	'mergeColumns' => array('id_turno')
+));?>
+  <?php $this->endWidget();?>
+  
+  
 
     <p>    
   <div class="form-actions" style="text-align: center;">

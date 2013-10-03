@@ -32,6 +32,7 @@ class ServicioComplementarioController extends GxController {
 	}
 	
 	public function actionView($id) {
+		Yii::app()->getSession()->add('id_planilla',$id);
 		$this->render('view', array(
 			'model' => $this->loadModel($id, 'Planilla'),
 		));
@@ -112,7 +113,7 @@ class ServicioComplementarioController extends GxController {
 		$establecimiento = Establecimiento::model()->find('id_establecimiento = :id_uno',array(':id_uno'=>Yii::app()->getSession()->get('id_establecimiento')));
 		$responsable = Responsable::model()->find('id_responsable = :id_est', array(':id_est'=>$establecimiento->id_responsable));
 		$localizacion = Localizacion::model()->find('id_localizacion = :id_uno',array(':id_uno'=>$model->id_localizacion));
-		
+		Yii::app()->getSession()->add('id_localizacion',$localizacion->id_localizacion);
 				
 		
 		if ($model->confirmado == 1) {
@@ -381,29 +382,6 @@ class ServicioComplementarioController extends GxController {
 			'name'=>'alu_mat_muj',
 	    	'header'=>'Total Mujeres',
 		),
-		/*
-		'alu_mat_tot',
-		'alu_mat_var',
-		'alu_mat_muj',
-		'alu_rep_tot',
-		'alu_rep_var',
-		'alu_rep_muj',
-		'nec_esp_edu',
-		'alu_ser_tot',
-		'alu_ser_var',
-		'alu_ser_muj',
-		'alu_obl_tot',
-		'alu_obl_var',
-		'alu_obl_muj',
-		'alu_opt_tot',
-		'alu_opt_var',
-		'alu_opt_muj',
-		array(
-			'name'=>'id_turno',
-			'value'=>'GxHtml::valueEx($data->idTurno)',
-			'filter'=>GxHtml::listDataEx(Turno::model()->findAllAttributes(null, true)),
-			),*/
-	
 		 		);
 		 return $gridColumns;
 		 	
@@ -453,5 +431,120 @@ class ServicioComplementarioController extends GxController {
 			$model->confirmado=0;
 			$model->save();
 		}
+	}
+	
+	public function actionImprimirLocalizacion() {
+		
+		$model=$this->loadModel(Yii::app()->getSession()->get('id_planilla'),'Planilla');
+		
+		/* echo "<PRE>";
+		print_r($model);
+		echo "</PRE>";
+		 */
+		$establecimiento=Establecimiento::model()->find(array(
+				'select'=>'nombre,cue,id_responsable',
+				'condition'=>'id_establecimiento=:id_establecimiento',
+				'params'=>array(':id_establecimiento'=>$model['id_establecimiento']),
+		));
+		
+		$localizacion=Localizacion::model()->find(array(
+				'select'=>'nombre,anexo',
+				'condition'=>'id_localizacion=:id_localizacion',
+				'params'=>array(':id_localizacion'=>$model['id_localizacion']),
+		));
+		
+		$responsable=Responsable::model()->find(array(
+				'select'=>'apellido,nombre',
+				'condition'=>'id_responsable=:id_responsable',
+				'params'=>array(':id_responsable'=>$establecimiento['id_responsable']),
+		));
+		
+		$nombreSeccion= '"nombreSeccion"';
+		$tipoSeccion= '"tipoSeccion"';
+		$matTotal='"matTotal"';
+		$matVaron='"matVaron"';
+		$matMujer='"matMujer"';
+		
+		$id_planilla= Yii::app()->getSession()->get('id_planilla');
+		
+		
+		$aEstablecimiento = array(
+			'nombre' => $establecimiento['nombre'],
+			'localizacion' => $localizacion['nombre'],
+			'cue' => $establecimiento['cue'],
+			'anexo' => $localizacion['anexo'],
+			'ingresador' => $model['ingresador'],
+			'responsable' => $responsable['apellido'].', '.$responsable['nombre'],
+		);
+		
+		$aEstructuraGrillaAlumnos = array(
+				'total' => $model['tot_alu_act'],
+				'varon' => $model['tot_act_var'],
+				'mujer' => $model['tot_act_muj'],
+		);
+		$aEstructuraGrillaAObligatoria = array(
+				'total' => $model['alu_obl_tot'],
+				'varon' => $model['alu_obl_var'],
+				'mujer' => $model['alu_obl_muj'],
+		);
+		$aEstructuraGrillaVoluntaria = array(
+				'total' => $model['alu_opt_tot'],
+				'varon' => $model['alu_opt_var'],
+				'mujer' => $model['alu_opt_muj'],
+		);
+		
+		$aAlumnos = array(
+				'alumnos' => $aEstructuraGrillaAlumnos,
+				'obligatoria' => $aEstructuraGrillaAObligatoria,
+				'voluntaria' => $aEstructuraGrillaVoluntaria,
+		);
+		
+		$sql = "SELECT
+		public.detalle_planilla.nombre_taller AS alumnos,
+		public.caracter_actividad.descripcion AS tipo,
+		public.turno.descripcion AS turno,
+		public.detalle_planilla.alu_mat_tot AS total,
+		public.detalle_planilla.alu_mat_var AS varon,
+		public.detalle_planilla.alu_mat_muj AS mujer
+		FROM
+		public.detalle_planilla
+		INNER JOIN public.caracter_actividad ON (public.detalle_planilla.id_caracter_actividad = public.caracter_actividad.id_caracter_actividad)
+		INNER JOIN public.turno ON (public.detalle_planilla.id_turno = public.turno.id_turno)
+		WHERE
+		public.detalle_planilla.id_planilla = ' $id_planilla '
+		ORDER BY
+		public.detalle_planilla.id_detalle_planilla ";
+		
+		$connection = Yii::app()->db;
+		$command = $connection->createCommand($sql);
+		$aActividades = $command->queryAll();
+		
+		/* echo "<PRE>";
+		print_r($Actividades);
+		echo "</PRE>"; 
+	
+		$aEstructuraGrillaActividades = array(
+				'alumnos' => '',
+				'tipo' => '',
+				'turno' => '',
+				'total' => 0,
+				'varon' => 0,
+				'mujer' => 0,
+		);*/
+		
+		$sArchivo = strtolower('ServicioComplementario-'. date("Y-m-d")) . ".pdf";
+		$sFecha = date("Y-m-d");
+		$sMes = strtoupper($model['mes']);
+		$sAnio = $model['anio'];
+		$PDF = new PlanillaPDF();
+		$PDF->ImprimirPlanillaServicioComplementario(//
+				'', // SIEMPRE VACIO lo dejo por compatiblidad
+				$sFecha, //
+				$sMes, //
+				$sAnio, //
+				$aEstablecimiento, //
+				$aAlumnos, //
+				$aActividades, //
+				$sArchivo); 
 	}
 }

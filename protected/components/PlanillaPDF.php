@@ -359,7 +359,7 @@ class PlanillaPDF extends PDF {
     $this->Cell(30, 6, 'Ministerio de Educación', 0, 0, 'L');
     $this->SetXY($this->paginaMargenIzq, $this->paginaMargenSup + 6);
     $this->Cell(30, 6, 'Dirección de Estadística', 0, 0, 'L');
-    $this->SetX(150);
+    $this->SetXY(150, $this->paginaMargenSup);
     $this->Cell(50, 6, 'Planilla de Información Estadística', 0, 0, 'R');
   }
 
@@ -381,10 +381,9 @@ class PlanillaPDF extends PDF {
           $sArchivo = ''
   ) {
 
-    $test = empty($aEstablecimiento) &&
-            empty($aCiclo) &&
-            empty($aSecciones) &&
-            empty($aAlimentacion);
+    $test = empty($sFecha) &&
+            empty($sMes) &&
+            empty($sAnio);
 
     $pdf = $this->AbrirPDF($sArchivo);
     $this->ImprimirEncabezado($sTipo, $sFecha, $sMes, $sAnio, $aEstablecimiento, $pdf);
@@ -396,13 +395,112 @@ class PlanillaPDF extends PDF {
       $this->ImprimirDivisionComun($sTipo, $aDivision, $pdf);
     $this->ImprimirAlimento($sTipo, $aAlimentacion, $pdf);
     $this->ImprimirPie($aEstablecimiento, $pdf);
-	$pdf->Output($sArchivo, 'D');
-    header('Content-type: application/json');
-    echo json_encode(array(
-        'result' => true,
-        'archivo' => $sArchivo,
-    ));
-    Yii::app()->end();
+    $pdf->Output($sArchivo, 'D');
+    if (!$test) {
+      header('Content-type: application/json');
+      echo json_encode(array(
+          'result' => true,
+          'archivo' => $sArchivo,
+      ));
+      Yii::app()->end();
+    }
+  }
+
+  public function ImprimirPlanillaServicioComplementario(
+  $sTipo = '', //
+          $sFecha = '', //
+          $sMes = '', //
+          $sAnio = '', //
+          $aEstablecimiento = array(), //
+          $aAlumnos = array(), //
+          $aActividades = array(), //
+          $sArchivo = ''
+  ) {
+
+    $test = empty($sFecha) &&
+            empty($sMes) &&
+            empty($sAnio);
+
+    $pdf = $this->AbrirPDF($sArchivo);
+    $sTipo = 'SERVICIOS COMPLEMENTARIOS\nPara los Servicios Alternativos/Complementarios';
+    $this->ImprimirEncabezado($sTipo, $sFecha, $sMes, $sAnio, $aEstablecimiento, $pdf);
+    $this->ImprimirAlumnos($aAlumnos, $pdf);
+    $this->ImprimirActividades($aActividades, $pdf);
+    $pdf->Output($sArchivo, 'D');
+    if (!$test) {
+      header('Content-type: application/json');
+      echo json_encode(array(
+          'result' => true,
+          'archivo' => $sArchivo,
+      ));
+      Yii::app()->end();
+    }
+  }
+
+  public function ImprimirPlanillaIFTTP(
+  $sTipo = '', //
+          $sFecha = '', //
+          $sMes = '', //
+          $sAnio = '', //
+          $aEstablecimiento = array(), //
+          $aMatricula = array(), //
+          $aCursoIF = array(), //
+          $aCursoTTP = array(), //
+          $sArchivo = ''
+  ) {
+
+    $test = empty($sFecha) &&
+            empty($sMes) &&
+            empty($sAnio);
+
+    $pdf = $this->AbrirPDF($sArchivo);
+    $sTipo = 'Itinerario Formativo (I.F.) - Trayecto Técnico Profesional (T.T.P.)';
+    $this->ImprimirEncabezado($sTipo, $sFecha, $sMes, $sAnio, $aEstablecimiento, $pdf);
+    $this->ImprimirMatricula($aMatricula, $pdf);
+    $this->ImprimirGrillaIFTTP('IF', $aCursoIF, $pdf);
+    $this->ImprimirGrillaIFTTP('TTP', $aCursoTTP, $pdf);
+    $pdf->Output($sArchivo, 'D');
+    if (!$test) {
+      header('Content-type: application/json');
+      echo json_encode(array(
+          'result' => true,
+          'archivo' => $sArchivo,
+      ));
+      Yii::app()->end();
+    }
+  }
+
+  public function ImprimirPlanillaEstablecimiento(
+  $sTipo = '', //
+          $sFecha = '', //
+          $sMes = '', //
+          $sAnio = '', //
+          $aEstablecimiento = array(), //
+          $aHoras = array(), //
+          $aNoDocente = array(), //
+          $aDocente = array(), //
+          $sArchivo = ''
+  ) {
+
+    $test = empty($sFecha) &&
+            empty($sMes) &&
+            empty($sAnio);
+
+    $pdf = $this->AbrirPDF($sArchivo);
+    $this->ImprimirEncabezado('', $sFecha, $sMes, $sAnio, $aEstablecimiento, $pdf);
+    $this->ImprimirHoras($aHoras, $pdf);
+    $this->ImprimirNoDocente($aNoDocente, $pdf);
+    $this->ImprimirDocente($aDocente, $pdf);
+    $this->ImprimirPie($aEstablecimiento, $pdf);
+    $pdf->Output($sArchivo, 'D');
+    if (!$test) {
+      header('Content-type: application/json');
+      echo json_encode(array(
+          'result' => true,
+          'archivo' => $sArchivo,
+      ));
+      Yii::app()->end();
+    }
   }
 
   public function ImprimirEncabezado(
@@ -417,15 +515,15 @@ class PlanillaPDF extends PDF {
     $pdf->Cell(15, 6, "FECHA:", 0, 0, 'L');
     $pdf->SetXY(30, 18);
     $pdf->Cell(20, 6, $fecha, 1, 0, 'C');
-    $pdf->SetXY(170, 18);
+    $pdf->SetXY(170, 12);
     $pdf->Cell(30, 6, "DATOS AL", 0, 0, 'L');
-    $pdf->SetXY(150, 24);
+    $pdf->SetXY(150, 18);
     $pdf->Cell(20, 6, "MES", 0, 0, 'R');
-    $pdf->SetXY(150, 30);
+    $pdf->SetXY(150, 24);
     $pdf->Cell(20, 6, "AÑO", 0, 0, 'R');
-    $pdf->SetXY(170, 24);
+    $pdf->SetXY(170, 18);
     $pdf->Cell(30, 6, "$mes", 1, 0, 'C');
-    $pdf->SetXY(170, 30);
+    $pdf->SetXY(170, 24);
     $pdf->Cell(30, 6, "$anio", 1, 0, 'C');
     switch ($tipo) {
       case 'II':
@@ -449,6 +547,7 @@ class PlanillaPDF extends PDF {
         break;
 
       default:
+        $titulo = $tipo;
         break;
     }
 
@@ -456,30 +555,37 @@ class PlanillaPDF extends PDF {
     $pdf->Cell(0, 6, $titulo, 0, 0, 'C');
     $pdf->SetXY(20, 36);
     $pdf->Cell(45, 6, "ESTABLECIMIENTO", 0, 0, 'R');
-    $pdf->SetXY(20, 42);
-    $pdf->Cell(45, 6, "LOCALIZACIÓN", 0, 0, 'R');
     $pdf->SetXY(70, 36);
     $pdf->Cell(70, 6, $establecimiento['nombre'], 1, 0, 'L');
-    $pdf->SetXY(70, 42);
-    $pdf->Cell(70, 6, $establecimiento['localizacion'], 1, 0, 'L');
-    $pdf->SetXY(145, 36);
+    if (isset($establecimiento['localizacion'])) {
+      $pdf->SetXY(20, 42);
+      $pdf->Cell(45, 6, "LOCALIZACIÓN", 0, 0, 'R');
+      $pdf->SetXY(70, 42);
+      $pdf->Cell(70, 6, $establecimiento['localizacion'], 1, 0, 'L');
+    }
+    $pdf->SetXY(150, 36);
     $pdf->Cell(20, 6, "CUE", 0, 0, 'R');
-    $pdf->SetXY(145, 42);
-    $pdf->Cell(20, 6, "ANEXO", 0, 0, 'R');
-    $pdf->SetXY(165, 36);
-    $pdf->Cell(25, 6, $establecimiento['cue'], 1, 0, 'L');
-    $pdf->SetXY(165, 42);
-    $pdf->Cell(25, 6, $establecimiento['anexo'], 1, 0, 'L');
+    $pdf->SetXY(170, 36);
+    $pdf->Cell(30, 6, $establecimiento['cue'], 1, 0, 'L');
+    if (isset($establecimiento['anexo'])) {
+      $pdf->SetXY(150, 42);
+      $pdf->Cell(20, 6, "ANEXO", 0, 0, 'R');
+      $pdf->SetXY(170, 42);
+      $pdf->Cell(30, 6, $establecimiento['anexo'], 1, 0, 'L');
+    }
     $h = 6;
-    $pdf->SetXY(10, -18);
-    $pdf->Cell(40, $h, 'INGRESADOR:', 0, 0, 'R');
-    $pdf->SetXY(50, -18);
-    $pdf->Cell(50, $h, $establecimiento['ingresador'], 1, 0, 'R');
-    $pdf->SetXY(110, -18);
-    $pdf->Cell(40, $h, 'RESPONSABLE:', 0, 0, 'R');
-    $pdf->SetXY(150, -18);
-    $pdf->Cell(50, $h, $establecimiento['responsable'], 1, 0, 'R');
-
+    if (isset($establecimiento['ingresador'])) {
+      $pdf->SetXY(10, -18);
+      $pdf->Cell(40, $h, 'INGRESADOR:', 0, 0, 'R');
+      $pdf->SetXY(50, -18);
+      $pdf->Cell(50, $h, $establecimiento['ingresador'], 1, 0, 'R');
+    }
+    if (isset($establecimiento['responsable'])) {
+      $pdf->SetXY(110, -18);
+      $pdf->Cell(40, $h, 'RESPONSABLE:', 0, 0, 'R');
+      $pdf->SetXY(150, -18);
+      $pdf->Cell(50, $h, $establecimiento['responsable'], 1, 0, 'R');
+    }
     return;
   }
 
@@ -729,7 +835,7 @@ class PlanillaPDF extends PDF {
         'asiTotal' => array('w' => $PP['asiTotal']['w'] * 3, 'h' => $h, 'T' => 'ASISTENCIA MEDIA',
             'cols' => array('asiTotal', 'asiVaron', 'asiMujer')),
     );
-    $SS = array( //2013-09-30 Pediste intercambiar orden nivel-ciclo
+    $SS = array(//2013-09-30 Pediste intercambiar orden nivel-ciclo
         'ord' => array('w' => 5, 'h' => $h * 2, 'T' => 'Ord'),
         'nivel' => array('w' => 20, 'h' => $h * 2, 'T' => 'Nivel\nServicio'),
         'ciclo' => array('w' => 15, 'h' => $h * 2, 'T' => 'Ciclo/Sala\nAño de\nEstudio'),
@@ -879,177 +985,90 @@ class PlanillaPDF extends PDF {
 
   public function ImprimirPie($aEstablecimiento, $pdf) {
 
-    $w = 140;
-    $y = 148;
-    $x = $this->paginaMargenIzq;
-    $h = 6;
+    if (isset($aEstablecimiento['domicilio'])) {
+      $w = 140;
+      $y = 148;
+      $x = $this->paginaMargenIzq - 5;
+      $h = 6;
 
-    $x1 = $x;
-    $y1 = $y;
+      $x1 = $x;
+      $y1 = $y;
 
-    $pdf->SetXY($x1, $y1);
-    $pdf->Cell(50, $h, 'Domicilio Actualizado', 1, 0, 'C');
-    $pdf->SetXY($x1 + 50, $y1);
-    $pdf->Cell($w, $h, $aEstablecimiento['domicilio'], 1, 0, 'C');
+      $pdf->SetXY($x1, $y1);
+      $pdf->Cell(50, $h, 'Domicilio Actualizado', 1, 0, 'C');
+      $pdf->SetXY($x1 + 50, $y1);
+      $pdf->Cell($w, $h, $aEstablecimiento['domicilio'], 1, 0, 'C');
 
-    $y1 += $h;
-    $pdf->SetXY($x1, $y1);
-    $pdf->Cell(50, $h, 'Teléfono/s', 1, 0, 'C');
-    $pdf->SetXY($x1 + 50, $y1);
-    $pdf->Cell($w, $h, $aEstablecimiento['telefono'], 1, 0, 'C');
+      $y1 += $h;
+      $pdf->SetXY($x1, $y1);
+      $pdf->Cell(50, $h, 'Teléfono/s', 1, 0, 'C');
+      $pdf->SetXY($x1 + 50, $y1);
+      $pdf->Cell($w, $h, $aEstablecimiento['telefono'], 1, 0, 'C');
+    } else {
+      $lbl = array(
+          'mail' => 'Mail Institucional',
+          'fecInauguracion' => 'Fecha de Inauguración',
+          'fecAniversario' => 'Fecha de Aniversario/Cumpleaños',
+          'fecInicio' => 'Fecha de Inicio Histórico de Actividades',
+          'lugarFecha' => 'Lugar y Fecha',
+          'secretaria' => 'Apellido y Nombre del SECRETARIO/A',
+          'vice' => 'Apellido y Nombre del VICEDIRECTOR/A',
+          'director' => 'Apellido y Nombre del DIRECTOR/A\nAUTORIDAD RESPONSABLE',
+      );
+      $y = 240;
+      $x = $this->paginaMargenIzq;
+      $h = 6;
+
+      $x1 = $x;
+      $y1 = $y;
+      $pdf->SetXY($x1, $y1);
+      $pdf->Cell(50, $h, $lbl['mail'], 1, 0, 'C');
+      $pdf->SetXY($x1 + 50, $y1);
+      $pdf->Cell(140, $h, $aEstablecimiento['mail'], 1, 0, 'C');
+
+      $y1 += 2 * $h;
+      $pdf->SetXY($x1, $y1);
+      $pdf->Cell(50, $h, $lbl['fecInauguracion'], 1, 0, 'C');
+      $pdf->SetXY($x1 + 70, $y1);
+      $pdf->Cell(50, $h, $lbl['fecAniversario'], 1, 0, 'C');
+      $pdf->SetXY($x1 + 140, $y1);
+      $pdf->Cell(50, $h, $lbl['fecInicio'], 1, 0, 'C');
+      $y1+=$h;
+      $pdf->SetXY($x1, $y1);
+      $pdf->Cell(50, $h, $aEstablecimiento['fecInauguracion'], 1, 0, 'C');
+      $pdf->SetXY($x1 + 70, $y1);
+      $pdf->Cell(50, $h, $aEstablecimiento['fecAniversario'], 1, 0, 'C');
+      $pdf->SetXY($x1 + 140, $y1);
+      $pdf->Cell(50, $h, $aEstablecimiento['fecInicio'], 1, 0, 'C');
+
+      $y1 += 2 * $h;
+      $pdf->SetXY($x1, $y1);
+      $pdf->Cell(50, $h, $lbl['lugarFecha'], 1, 0, 'C');
+      $pdf->SetXY($x1 + 50, $y1);
+      $pdf->Cell(140, $h, $aEstablecimiento['lugarFecha'], 1, 0, 'C');
+
+      $y1 += 2 * $h;
+      $pdf->SetXY($x1, $y1);
+      $pdf->Cell(50, $h, $lbl['secretaria'], 1, 0, 'C');
+      $pdf->SetXY($x1 + 50, $y1);
+      $pdf->Cell(140, $h, $aEstablecimiento['secretaria'], 1, 0, 'C');
+
+      $y1 += 2 * $h;
+      $pdf->SetXY($x1, $y1);
+      $pdf->Cell(50, $h, $lbl['vice'], 1, 0, 'C');
+      $pdf->SetXY($x1 + 50, $y1);
+      $pdf->Cell(140, $h, $aEstablecimiento['vice'], 1, 0, 'C');
+
+      $y1 += 2 * $h;
+      $pdf->SetXY($x1, $y1);
+      $pdf->Cell(50, $h * 2, $lbl['director'], 1, 0, 'C');
+      $pdf->SetXY($x1 + 50, $y1);
+      $pdf->Cell(140, $h * 2, $aEstablecimiento['director'], 1, 0, 'C');
+    }
     return;
   }
 
-  /*
-   * Obsoleto
-   */
-
-  public function ImprimirPlanillaSA(
-  $sFecha = '', //
-          $sMes = '', //
-          $sAnio = '', //
-          $aEstablecimiento = array(), //
-          $aCicloLista = array(), //
-          $aCicloHoras = array(), //
-          $aSedeLista = array(), // 
-          $aSedeSeccion = array(), //
-          $aSedeHoras = array(), //
-          $aAlimento = array(), //
-          $aNoDocente = array(), //
-          $aDocente = array(), //
-          $archivo = ""                //
-  ) {
-
-    $adultos = null;
-
-    if (!empty($aCicloLista) && !empty($aCicloHoras)) {
-      $adultos = false;
-      $alumnado = $aCicloLista;
-      $horas = $aCicloHoras;
-    } else if (!empty($aSedeLista) && !empty($aSedeSeccion) && !empty($aSedeHoras)) {
-      $adultos = true;
-      $alumnado = $aSedeLista;
-      $seccion = $aSedeSeccion;
-      $horas = $aCicloHoras;
-    }
-
-    $this->ImprimirEncabezado($sFecha, $sMes, $sAnio, $aEstablecimiento, $adultos, $pdf);
-    $this->ImprimirAlumnado($alumnado, $adultos, $establecimiento['tipo'] == 'Secundario' ||
-            $establecimiento['tipo'] == 'Polimodal', $pdf);
-    if ($adultos)
-      $this->ImprimirSeccion($seccion, $pdf);
-    $pdf->AddPage();
-    $this->ImprimirHoras($horas, $adultos, $pdf);
-    $this->ImprimirAlimentos($alimento, $pdf);
-    $this->ImprimirNoDocente($noDocente, $pdf);
-    $this->ImprimirDocente($docente, $pdf);
-    $this->ImprimirCierre($establecimiento, $pdf);
-
-    $pdf->Output(Yii::app()->basePath . '/../' . 'tmp/' . $archivo, 'F');
-    header('Content-type: application/json');
-    echo json_encode(array(
-        'result' => true,
-        'archivo' => 'tmp/' . $archivo,
-    ));
-    Yii::app()->end();
-  }
-
-  /*
-   * Esta función se usa para generar el formulario vacío de datos para su carga manual
-   */
-
-  public function ImprimirFormulario($adulto = false, $secundario = false, $archivo = "") {
-    $sFecha = '';
-    $sMes = '';
-    $sAnio = '';
-    $aEstablecimiento = array(
-        'tipo' => '',
-        'nombre' => '',
-        'localizacion' => '',
-        'cue' => '',
-        'anexo' => '',
-        'ingresador' => '',
-        'responsable' => '',
-        'domicilio' => '',
-        'telefono' => '',
-        'correoE' => '',
-        'fInauguracion' => '',
-        'fInicio' => '',
-        'fAniversario' => '',
-        'lugarFecha' => '',
-        'secretario' => '',
-        'vicedirector' => '',
-        'director' => '',
-    );
-    $alumnado = array();
-    if (!$adulto) {
-      $archivo = "inicial.pdf";
-      $aEstablecimiento['tipo'] = 'INICIAL - E.G.B. 1 y 2 - PRIMARIO - SECUNDARIO - POLIMODAL';
-    } else if (!$secundario) {
-      $archivo = "alfabetizacion.pdf";
-      $aEstablecimiento['tipo'] = 'ALFABETIZACIÓN - E.G.B. 1 y 2 - PRIMARIO';
-    } else {
-      $archivo = "secundario.pdf";
-      $aEstablecimiento['tipo'] = 'SECUNDARIO - POLIMODAL';
-    }
-
-    $pdf = new PlanillaPDF(
-            $this->paginaOrientacion, $this->paginaUnidad, $this->paginaTamano);
-    $pdf->SetAutoPageBreak(false);
-    $pdf->SetMargins($this->paginaMargenIzq, $this->paginaMargenSup, $this->paginaMargenDer);
-    $pdf->AliasNbPages();
-    $pdf->AddPage();
-    $this->ImprimirEncabezado($sFecha, $sMes, $sAnio, $aEstablecimiento, $adulto, $secundario, $pdf);
-    $this->ImprimirAlumnado($alumnado, $adulto, $secundario, $pdf);
-    if ($adulto) {
-      $seccion = array(
-          'independiente' => array(),
-          'multiples' => array(),
-          'total' => array(),
-      );
-      $horas = array(
-          'dictado' => array(),
-          'primario' => array(),
-          'primarioSemi' => array(),
-          'egb' => array(),
-          'egbSemi' => array(),
-          'secundario' => array(),
-          'secundarioSemi' => array(),
-          'proyecto' => array(),
-          'otros' => array(),
-          'total' => array(),
-      );
-      $this->ImprimirSeccion($seccion, $pdf);
-    } else {
-      $horas = array(
-          'dictado' => array(),
-          'maternal' => array(),
-          'infantes' => array(),
-          'egb12' => array(),
-          //'egb39' => array(),
-          'secundario' => array(),
-          'polimodal' => array(),
-          'otros' => array(),
-          'total' => array(),
-      );
-    }
-    $pdf->AddPage();
-    $this->ImprimirHoras($horas, $adulto, $pdf);
-    // $this->ImprimirAlimentos($alimento, $pdf);
-    // $this->ImprimirNoDocente($noDocente, $pdf);
-    // $this->ImprimirDocente($docente, $pdf);
-    // $this->ImprimirCierre($establecimiento, $pdf);
-
-    $pdf->Output(Yii::app()->basePath . '/../' . 'tmp/' . $archivo, 'F');
-    /* header('Content-type: application/json');
-      echo json_encode(array(
-      'result' => true,
-      'archivo' => 'tmp/' . $archivo,
-      )); */
-    //Yii::app()->end();
-  }
-
-  public function ImprimirHoras($horas, $adultos, $pdf) {
+  public function ImprimirHoras($horas, $pdf) {
     $coord = array(
         'total' => array('T' => 'Total\n1+2+3+4+5'),
         'titular' => array('T' => 'Titular\n(1)'),
@@ -1059,66 +1078,433 @@ class PlanillaPDF extends PDF {
         'sinCubrir' => array('T' => 'Sin Cubrir\n(5)'),
         'pasiva' => array('T' => 'Tareas\nPasivas'),
         'adscripta' => array('T' => 'Comisión\nAdscripción'),
+        'licencia' => array('T' => 'Licencia'),
         'contrato' => array('T' => 'Contradas'),
     );
-    $titEGB = 'INICIAL - E.G.B. 1 y 2 - PRIMARIO -\nSECUNDARIO - POLIMODAL';
-    $lblEGB = array(
+    $lbl = array(
         'dictado' => 'Horas Destinas al DICTADO DE CLASES',
         'maternal' => 'Horas Destinadas a JARDÍN MATERNAL',
         'infantes' => 'Horas Destinadas a JARDÍN DE INFANTES',
-        'egb12' => 'Horas Destinadas a E.G.B. 1 y 2',
-        //'egb39' => 'Horas Destinadas a E.G.B. 3 a 9',
-        'secundario' => 'Horas Destinadas a SECUNDARIO C.B. (1º, 2º y 3º)',
-        'polimodal' => 'Horas Destinadas a POLIMODAL',
+        'primario' => 'Horas Destinadas a PRIMARIO',
+        'primarioSemi' => 'Sistema Semipresencial de Primario\n(incluídas en anterior)',
+        'secundario' => 'Horas Destinadas a SECUNDARIO',
+        'secundarioSemi' => 'Sistema Semipresencial de Secundario\n(incluídas en anterior)',
+        'proyecto' => 'Horas destinadas a proyectos/actividades institucionales',
         'otros' => 'Horas Cátedra destinadas a otras\nactividades/funciones',
         'total' => 'TOTAL de Horas de la Institución',
     );
-    $titAdu = 'ALFABETIZACIÓN - PRIMARIO -\nSECUNDARIO - E.G.B. - POLIMODAL';
-    $lblAdu = array(
-        'dictado' => 'Horas Destinas al DICTADO DE CLASES',
-        'primario' => 'Total de Horas Destinadas a PRIMARIO',
-        'primarioSemi' => 'Sistema Semipresencial de Primario (incluídas en anterior)',
-        'egb' => 'Total de Horas Destinadas a E.G.B.',
-        'egbSemi' => 'Sistema Semipresencial de E.G.B. (incluídas en anterior)',
-        'secundario' => 'Total de Horas Destinadas a SECUNDARIO',
-        'secundarioSemi' => 'Sistema Semipresencial de Secundario (incluídas en anterior)',
-        'proyecto' => 'Horas destinadas a proyectos/actividades institucionales',
-        'otros' => 'Horas destinadas a otras actividades/funciones',
-        'total' => 'TOTAL de Horas de la Institución',
-    );
-    if (!$adultos) {
-      $titulo = $titEGB;
-      $lbl = $lblEGB;
-    } else {
-      $titulo = $titAdu;
-      $lbl = $lblAdu;
-    }
-    $w = 15;
-    $y = 42;
-    $x = $this->paginaMargenIzq + 60;
+
+    $titulo = '';
+    if (isset($horas['maternal']))
+      $titulo .= 'INICIAL';
+    if (isset($horas['primario']))
+      $titulo .= (empty($titulo) ? '' : ' - ') . 'PRIMARIO';
+    if (isset($horas['secundario']))
+      $titulo .= (empty($titulo) ? '' : ' - ') . 'SECUNDARIO';
+    if (isset($horas['primarioSemi']) || isset($horas['secundarioSemi']))
+      $titulo = 'ADULTOS ' . $titulo;
+
+
+    $w = 14;
+    $y = 72;
+    $x = $this->paginaMargenIzq - 5 + 60;
     $h = 6;
-    $pdf->SetXY($x - 60, $y - $h * 3);
-    $pdf->Cell(60, $h, 'HORAS CÁTEDRA DEL ESTABLECIMIENTO', 0, 0, 'C');
-    $pdf->SetXY($x - 60, $y - $h * 2);
-    $pdf->Cell(60, $h * 2, $titulo, 1, 0, 'C');
+    $pc = 55;
+    $pdf->SetXY($x - $pc, $y - $h * 3);
+    $pdf->Cell($pc, $h, 'HORAS CÁTEDRA DEL ESTABLECIMIENTO', 0, 0, 'C');
+    $pdf->SetXY($x, $y - $h * 3);
+    $pdf->Cell($w * 6, $h, 'PLANTA ORGANICA FUNCIONAL (P.O.F.)', 1, 0, 'C');
+    $pdf->SetXY($x - $pc, $y - $h * 2);
+    $pdf->Cell($pc, $h * 2, $titulo, 1, 0, 'C');
     $i = 0;
     foreach ($lbl as $k => $v) {
+      if (isset($horas[$k])) {
+        $j = 0;
+        foreach ($coord as $c => $d) {
+          if ($c == 'total') {
+            $pdf->SetXY($x - $pc, $y + $h * $i);
+            $pdf->Cell($pc, $h, $v, 1, 0, 'R');
+          }
+          if ($k == 'dictado') {
+            $pdf->SetXY($x + $w * $j, $y - $h * 2);
+            $pdf->Cell($w, $h * 2, $d['T'], 1, 0, 'C');
+          }
+          $pdf->SetXY($x + $w * $j, $y + $h * $i);
+          $pdf->Cell($w, $h, empty($horas[$k]) ? '' : $horas[$k][$c], 1, 0, 'C');
+          $j++;
+        }
+        $i++;
+      }
+    }
+  }
+
+  public function ImprimirNoDocente($aNoDocente, $pdf) {
+    $coord = array(
+        'total' => array('T' => 'TOTAL'),
+        'varon' => array('T' => 'Varones'),
+        'mujer' => array('T' => 'Mujeres'),
+    );
+    $lbl = array(
+        'administrativo' => 'Personal Administrativo',
+        'servicio' => 'Personal de Servicio y Maestranza',
+        'plan' => 'Planes Laborales de Empleo',
+        'contratado' => 'Contratados',
+        'otro' => 'Otros: (Especificar)',
+        'total' => 'Totales',
+    );
+
+    $aOtros = $aNoDocente['otro'];
+    $aTotal = $aNoDocente['total'];
+    unset($aNoDocente['otro']);
+    unset($aNoDocente['total']);
+
+    $w = 15;
+    $y = 150;
+    $x = $this->paginaMargenIzq - 5 + 40;
+    $h = 6;
+    $pdf->SetXY($x - 40, $y);
+    $pdf->Cell(40, $h, 'PERSONAL NO DOCENTE', 0, 0, 'C');
+    $y+=2 * $h;
+    $i = 0;
+    foreach ($aNoDocente as $k => $v) {
       $j = 0;
       foreach ($coord as $c => $d) {
         if ($c == 'total') {
-          $pdf->SetXY($x - 60, $y + $h * $i);
-          $pdf->Cell(60, $h, $v, 1, 0, 'R');
+          $pdf->SetXY($x - 40, $y + $h * $i);
+          $pdf->Cell(40, $h, $lbl[$k], 1, 0, 'R');
         }
-        if ($k == 'dictado') {
-          $pdf->SetXY($x + $w * $j, $y - $h * 2);
-          $pdf->Cell($w, $h * 2, $d['T'], 1, 0, 'C');
+        if ($k == 'administrativo') {
+          $pdf->SetXY($x + $w * $j, $y - $h);
+          $pdf->Cell($w, $h, $d['T'], 1, 0, 'C');
         }
         $pdf->SetXY($x + $w * $j, $y + $h * $i);
-        $pdf->Cell($w, $h, empty($horas[$k]) ? '' : $seccion[$k][$c], 1, 0, 'C');
+        $pdf->Cell($w, $h, empty($aNoDocente[$k]) ? '' : $aNoDocente[$k][$c], 1, 0, 'C');
         $j++;
       }
       $i++;
     }
+    $y += $h * ($i + 1);
+    $pdf->SetXY($x - 40, $y);
+    $pdf->Cell(40, $h, $lbl['otro'], 1, 0, 'R');
+    $y +=$h;
+    $i = 0;
+    foreach ($aOtros as $k => $v) {
+      $j = 0;
+      foreach ($coord as $c => $d) {
+        if ($c == 'total') {
+          $pdf->SetXY($x - 40, $y + $h * $i);
+          $pdf->Cell(40, $h, $k, 1, 0, 'R');
+        }
+        $pdf->SetXY($x + $w * $j, $y + $h * $i);
+        $pdf->Cell($w, $h, empty($aOtros[$k]) ? '' : $aOtros[$k][$c], 1, 0, 'C');
+        $j++;
+      }
+      $i++;
+    }
+    $y += $h * ($i + 1);
+    $j = 0;
+    foreach ($aTotal as $c => $d) {
+      if ($c == 'total') {
+        $pdf->SetXY($x - 40, $y);
+        $pdf->Cell(40, $h, $lbl['total'], 1, 0, 'R');
+      }
+      $pdf->SetXY($x + $w * $j, $y);
+      $pdf->Cell($w, $h, $d, 1, 0, 'C');
+      $j++;
+    }
+  }
+
+  public function ImprimirDocente($aDocente, $pdf) {
+    $coord = array(
+        'total' => array('T' => 'TOTAL'),
+        'varon' => array('T' => 'Varones'),
+        'mujer' => array('T' => 'Mujeres'),
+    );
+    $lbl = array(
+        'activo' => 'Total de DOCENTES en Actividad',
+        'pasivo' => 'Personal Docente en Tareas Pasivas',
+        'noPertenece' => 'Docentes afectados a este Establecimiento que\nno pertenecen a esta planta funcional',
+        'pertenece' => 'Cantidad de docentes pertenecientes a esta planta \nfuncional afectados a otro establecimiento',
+    );
+
+    $w = 15;
+    $y = 150;
+    $x = 165;
+    $h = 6;
+    $pdf->SetXY($x - 65, $y);
+    $pdf->Cell(95, $h, 'PERSONAL CON DESIGNACION DOCENTE POR SEXO', 0, 0, 'C');
+    $y+=$h;
+    $pdf->SetXY($x - 65, $y);
+    $pdf->Cell(95, $h * 3, 'NOTA:\nSe debe contar a cada personal docente una sola vez,\naunque tenga más de un cargo o tipo de designación.', 0, 0, 'L');
+
+    $y+=4 * $h;
+    $i = 0;
+    foreach ($aDocente as $k => $v) {
+      $j = 0;
+      foreach ($coord as $c => $d) {
+        if ($c == 'total') {
+          $pdf->SetXY($x - 65, $y + $h * $i);
+          $pdf->Cell(65, $h, $lbl[$k], 1, 0, 'R');
+        }
+        if ($k == 'activo') {
+          $pdf->SetXY($x + $w * $j, $y - $h);
+          $pdf->Cell($w, $h, $d['T'], 1, 0, 'C');
+        }
+        $pdf->SetXY($x + $w * $j, $y + $h * $i);
+        $pdf->Cell($w, $h, empty($aDocente[$k]) ? '' : $aDocente[$k][$c], 1, 0, 'C');
+        $j++;
+      }
+      $i++;
+    }
+  }
+
+  public function ImprimirAlumnos($aAlumnos, $pdf) {
+    $coord = array(
+        'total' => array('T' => 'TOTAL'),
+        'varon' => array('T' => 'Varones'),
+        'mujer' => array('T' => 'Mujeres'),
+    );
+    $lbl = array(
+        'alumnos' => 'TOTAL DE ALUMNOS\n(Se debe contar a cada alumno una sola vez)',
+        'obligatoria' => 'Alumnos en ACTIVIDADES OBLIGATORIAS\n(Se debe contar a cada alumno una sola vez)',
+        'voluntaria' => 'Alumnos en ACTIVIDADES OPTATIVAS\n(Se debe contar a cada alumno una sola vez)',
+    );
+
+    $w = 15;
+    $y = 54;
+    $x = 115;
+    $h = 8;
+    $pdf->SetXY($x, $y);
+    $pdf->Cell(45, $h, 'ALUMNOS', 1, 0, 'C');
+    $y+=$h * 2;
+    $i = 0;
+    foreach ($aAlumnos as $k => $v) {
+      $j = 0;
+      foreach ($coord as $c => $d) {
+        if ($c == 'total') {
+          $pdf->SetXY($x - 65, $y + $h * $i);
+          $pdf->Cell(65, $h, $lbl[$k], 1, 0, 'R');
+        }
+        if ($k == 'alumnos') {
+          $pdf->SetXY($x + $w * $j, $y - $h);
+          $pdf->Cell($w, $h, $d['T'], 1, 0, 'C');
+        }
+        $pdf->SetXY($x + $w * $j, $y + $h * $i);
+        $pdf->Cell($w, $h, empty($aAlumnos[$k]) ? '' : $aAlumnos[$k][$c], 1, 0, 'C');
+        $j++;
+      }
+      $i++;
+    }
+  }
+
+  public function ImprimirActividades($aActividades, $pdf) {
+    $x = 10;
+    $y = 102;
+    $h = 6;
+    $k = 0;
+
+    $coordenadas = array(
+        'ord' => array('w' => 5, 'h' => $h * 4, 'T' => 'Ord'),
+        'alumnos' => array('w' => 90, 'h' => $h * 4, 'T' => 'ALUMNOS POR ACTIVIDADES POR TURNO Y SEXO, SEGÚN\n' .
+            'OFERTAS, TALLERES, GRUPOS\n\n' .
+            'Se debe contar a cada alumno en cada uno de las\n' .
+            'Actividades/Ofertas/Talleres/Grupos al que asiste.'),
+        'tipo' => array('w' => 25, 'h' => $h * 2, 'T' => '1=Obligatorio\n' .
+            '2=Optat./Vol.'),
+        'turno' => array('w' => 30, 'h' => $h * 4, 'T' => 'Turno'),
+        'total' => array('w' => 15, 'h' => $h * 2, 'T' => 'Total'),
+        'varon' => array('w' => 15, 'h' => $h * 2, 'T' => 'Varones'),
+        'mujer' => array('w' => 15, 'h' => $h * 2, 'T' => 'Mujeres'),
+    );
+    $colapsadas = array(
+        'tipo' => array('w' => $coordenadas['tipo']['w'], 'h' => $h * 2, 'T' => 'Carácter de\n' .
+            'la Actividad',
+            'cols' => array('tipo')),
+        'total' => array('w' => $coordenadas['total']['w'] * 3, 'h' => $h * 2, 'T' => 'ALUMNOS',
+            'cols' => array('total', 'varon', 'mujer')),
+    );
+    $this->SetFont($this->fuente, 'B', 8 / 1.25);
+    $x1 = $x;
+
+    $cols = array();
+
+    foreach ($coordenadas as $k => $v) {
+      //Impresión de Celdas Titulo Colapsadas según el caso
+      if (isset($colapsadas[$k])) { //tiene título definido
+        $y1 = $y;
+        $cols = $colapsadas[$k]['cols'];
+        $pdf->SetXY($x1, $y1);
+        $pdf->Cell($colapsadas[$k]['w'], $colapsadas[$k]['h'], $colapsadas[$k]['T'], 1, 0, 'C');
+      }
+      if (in_array($k, $cols))
+        $y1 = $y + $h * 2;
+      else {
+        $cols = array();
+        $y1 = $y;
+      }
+
+      $pdf->SetXY($x1, $y1);
+      $pdf->Cell($v['w'], $v['h'], $v['T'], 1, 0, 'C');
+      $x1 += $v['w'];
+    }
+
+    $x = 10;
+    $y = 120;
+    $h = 6;
+    $k = 0;
+
+    $y+=1; //Corrijo posición, cambio altura grilla
+
+    $h = 5;
+
+    //Impresión Filas
+    foreach ($aActividades as $k => $v) {
+      $y += $h;
+      $x1 = $x;
+      $pdf->SetXY($x1, $y);
+      $pdf->Cell($coordenadas['ord']['w'], $h, $k + 1, 1, 0, 'C');
+      $x1 += $coordenadas['ord']['w'];
+      foreach ($v as $l => $w) {
+        if ($l !== 'ord') {
+          $pdf->SetXY($x1, $y);
+          $pdf->Cell($coordenadas[$l]['w'], $h, $v[$l], 1, 0, 'C');
+          $x1 += $coordenadas[$l]['w'];
+        }
+      }
+    }
+
+    return;
+  }
+
+  public function ImprimirMatricula($aMatricula, $pdf) {
+    $coord = array(
+        'total' => array('T' => 'TOTAL'),
+        'manana' => array('T' => 'Mañana'),
+        'tarde' => array('T' => 'Tarde'),
+        'vespertino' => array('T' => 'Vespertino'),
+        'noche' => array('T' => 'Noche'),
+        'doble' => array('T' => 'Doble'),
+    );
+    $lbl = array(
+        'if' => 'TOTAL de Alumnos matriculados en Itinerarios\n' .
+        'Formativos exclusivamente:',
+        'ttp' => 'TOTAL de Alumnos matriculados en Trayectos Técnicos\n' .
+        'Profesionales exclusivamente:',
+        'ambos' => 'Total de Alumnos en I.F. Y T.T.P.:',
+    );
+
+    $w = 15;
+    $y = 48;
+    $x = 95;
+    $h = 8;
+    $pdf->SetXY($x - 80, $y + $h);
+    $pdf->Cell(80, $h, 'ALUMNOS MATRICULADOS\n' .
+            'Se debe contar a los alumnos UNA SOLA VEZ:', 0, 0, 'C');
+    $pdf->SetXY($x + $w + 15, $y);
+    $pdf->Cell(75, $h, 'ALUMNOS POR TURNO\n' .
+            '(si un alumno concurre a más de un turno, contarlo en cada uno de ellos)', 0, 0, 'C');
+    $y+=$h * 2;
+    $i = 0;
+    foreach ($aMatricula as $k => $v) {
+      $j = 0;
+      foreach ($coord as $c => $d) {
+        if ($c == 'total') {
+          $pdf->SetXY($x - 80, $y + $h * $i);
+          $pdf->Cell(80, $h, $lbl[$k], 1, 0, 'R');
+        }
+        if ($k == 'if') {
+          $pdf->SetXY($x + $w * $j + ($c !== 'total' ? 15 : 0), $y - $h);
+          $pdf->Cell($w, $h, $d['T'], 1, 0, 'C');
+        }
+        $pdf->SetXY($x + $w * $j + ($c !== 'total' ? 15 : 0), $y + $h * $i);
+        $pdf->Cell($w, $h, empty($aMatricula[$k]) ? '' : $aMatricula[$k][$c], 1, 0, 'C');
+        $j++;
+      }
+      $i++;
+    }
+  }
+
+  public function ImprimirGrillaIFTTP($sTipo, $aGrilla, $pdf) {
+    $x = 15;
+    $y = $sTipo === 'IF' ? 91 : 180;
+    $h = 5;
+    $k = 0;
+
+    if ($sTipo === 'IF') {
+      $descripcion = 'ITINERARIO FORMATIVO';
+      $titulo = 'EXCLUSIVAMENTE DE LOS I.F. POR SEXO, SEGUN ITINERARIO.\n' .
+              'Los alumnos que cursen módulos de IF que integran un TTP no deben declararse en este cuadro.';
+    } else {
+      $descripcion = 'TRAYECTO TÉCNICO PROFESIONAL';
+      $titulo = 'ALUMNOS EXCLUSIVAMENTE DE LOS T.T.P. POR SEXO, SEGUN TRAYECTO\n' .
+              'En el caso de que los alumnos opten por cursar más de un Trayecto Profesional, regístrelos en cada uno de ellos.\n' .
+              'Incluir en este cuadro a los alumnos que cursan módulos de IF que integran un TTP';
+    }
+
+    $coordenadas = array(
+        'ord' => array('w' => 5, 'h' => $h * 2, 'T' => 'Ord'),
+        'descripcion' => array('w' => 100, 'h' => $h * 2, 'T' => $descripcion),
+        'turno' => array('w' => 35, 'h' => $h * 2, 'T' => 'Turno'),
+        'total' => array('w' => 15, 'h' => $h, 'T' => 'Total'),
+        'varon' => array('w' => 15, 'h' => $h, 'T' => 'Varones'),
+        'mujer' => array('w' => 15, 'h' => $h, 'T' => 'Mujeres'),
+    );
+    $colapsadas = array(
+        'total' => array('w' => $coordenadas['total']['w'] * 3, 'h' => $h, 'T' => 'ALUMNOS MATRICULADOS',
+            'cols' => array('total', 'varon', 'mujer')),
+    );
+    $this->SetFont($this->fuente, 'B', 8 / 1.25);
+    $x1 = $x;
+
+    $pdf->SetXY($x, $y);
+    $pdf->Cell(0, $h, $titulo, 0, 0, 'C');
+    $y+=$sTipo === 'IF' ? $h : $h + 2;
+    $cols = array();
+
+    foreach ($coordenadas as $k => $v) {
+      //Impresión de Celdas Titulo Colapsadas según el caso
+      if (isset($colapsadas[$k])) { //tiene título definido
+        $y1 = $y;
+        $cols = $colapsadas[$k]['cols'];
+        $pdf->SetXY($x1, $y1);
+        $pdf->Cell($colapsadas[$k]['w'], $colapsadas[$k]['h'], $colapsadas[$k]['T'], 1, 0, 'C');
+      }
+      if (in_array($k, $cols))
+        $y1 = $y + $h;
+      else {
+        $cols = array();
+        $y1 = $y;
+      }
+
+      $pdf->SetXY($x1, $y1);
+      $pdf->Cell($v['w'], $v['h'], $v['T'], 1, 0, 'C');
+      $x1 += $v['w'];
+    }
+
+    $y1 = $y + $h;
+    $k = 0;
+    $hg = 4.6;
+
+    //corrijo delta
+    $y1+= $h-$hg;
+
+    //Impresión Filas
+    foreach ($aGrilla as $k => $v) {
+      $y1 += $hg;
+      $x1 = $x;
+      $pdf->SetXY($x1, $y1);
+      $pdf->Cell($coordenadas['ord']['w'], $hg, $k + 1, 1, 0, 'C');
+      $x1 += $coordenadas['ord']['w'];
+      foreach ($v as $l => $w) {
+        if ($l !== 'ord') {
+          $pdf->SetXY($x1, $y1);
+          $pdf->Cell($coordenadas[$l]['w'], $hg, $v[$l], 1, 0, 'C');
+          $x1 += $coordenadas[$l]['w'];
+        }
+      }
+    }
+
+    return;
   }
 
 }

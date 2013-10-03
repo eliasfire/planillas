@@ -293,41 +293,41 @@ table.tableizer-table {
 		  <td bgcolor="#99FFCC"><span class="form"><?php echo $form->textField($model,'tot_pro_lic',array('class'=>'span1','value'=>$model->tot_pro_lic <> 0 ?  $model->tot_pro_lic : 0));?></span></td>
 		  <td bgcolor="#99FFCC"><span class="form"><?php echo $form->textField($model,'tot_pro_con',array('class'=>'span1','value'=>$model->tot_pro_con <> 0 ?  $model->tot_pro_con : 0));?></span></td>
     </tr>
-		<tr >
-			<td><span class="form">Horas Cátedra destinadas a otras actividades/funciones:</span></td>
-			<td><span class="form"><?php echo $form->textField($model,'tot_act_fun',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?>
-			</span></td>
-			<td bgcolor="#99FFCC"><span class="form"><?php echo $form->textField($model,'tot_fun_tit',array('class'=>'span1','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?>
-			</span></td>
-			<td bgcolor="#99FFCC"><span class="form"><?php echo $form->textField($model,'tot_fun_int',array('class'=>'span1','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?>
-			</span></td>
-			<td bgcolor="#99FFCC"><span class="form"><?php echo $form->textField($model,'tot_fun_tra',array('class'=>'span1','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?>
-			</span></td>
-			<td bgcolor="#99FFCC"><span class="form"><?php echo $form->textField($model,'tot_fun_sup',array('class'=>'span1','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?>
-			</span></td>
-			<td bgcolor="#99FFCC"><span class="form"><?php echo $form->textField($model,'tot_fun_sin',array('class'=>'span1','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?>
-			</span></td>
-			<td bgcolor="#99FFCC"><span class="form"><?php echo $form->textField($model,'tot_fun_tar',array('class'=>'span1','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?>
-			</span></td>
-			<td bgcolor="#99FFCC"><span class="form"><?php echo $form->textField($model,'tot_fun_com',array('class'=>'span1','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?>
-			</span></td>
-			<td bgcolor="#99FFCC"><span class="form"><?php echo $form->textField($model,'tot_fun_lic',array('class'=>'span1','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?>
-			</span></td>
-			<td bgcolor="#99FFCC"><span class="form"><?php echo $form->textField($model,'tot_fun_con',array('class'=>'span1','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?>
-			</span></td>
+		<tr>
+			<td>Horas Cátedra destinadas a otras actividades/funciones:</td>
+			<td><?php echo $form->textField($model,'tot_act_fun',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_act_fun <> 0 ?  $model->tot_act_fun : 0 ));?></td>
+			
+			<td bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_fun_tit',array('class'=>'span1','value'=>$model->tot_fun_tit <> 0 ?  $model->tot_fun_tit : 0 ));?>
+			</td>
+			<td bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_fun_int',array('class'=>'span1','value'=>$model->tot_fun_int <> 0 ?  $model->tot_fun_int : 0 ));?>
+			</td>
+			<td bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_fun_tra',array('class'=>'span1','value'=>$model->tot_fun_tra <> 0 ?  $model->tot_fun_tra : 0 ));?>
+			</td>
+			<td bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_fun_sup',array('class'=>'span1','value'=>$model->tot_fun_sup <> 0 ?  $model->tot_fun_sup : 0 ));?>
+			</td>
+			<td bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_fun_sin',array('class'=>'span1','value'=>$model->tot_fun_sin <> 0 ?  $model->tot_fun_sin : 0 ));?>
+			</td>
+			<td bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_fun_tar',array('class'=>'span1','value'=>$model->tot_fun_tar <> 0 ?  $model->tot_fun_tar : 0 ));?>
+			</td>
+			<td bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_fun_com',array('class'=>'span1','value'=>$model->tot_fun_com <> 0 ?  $model->tot_fun_com : 0 ));?>
+			</td>
+			<td bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_fun_lic',array('class'=>'span1','value'=>$model->tot_fun_lic <> 0 ?  $model->tot_fun_lic : 0 ));?>
+			</td>
+			<td bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_fun_con',array('class'=>'span1','value'=>$model->tot_fun_con <> 0 ?  $model->tot_fun_con : 0 ));?>
+			</td>
 		</tr>
 		<tr>
 			<td><span class="form">TOTAL de Horas de la Institución:</span></td>
-			<td><span class="form"><?php echo $form->textField($model,'tot_hor_ins',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?></span></td>
-			<td><span class="form"><?php echo $form->textField($model,'tot_ins_tit',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?></span></td>
-			<td><span class="form"><?php echo $form->textField($model,'tot_ins_int',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?></span></td>
-			<td><span class="form"><?php echo $form->textField($model,'tot_ins_tra',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?></span></td>
-			<td><span class="form"><?php echo $form->textField($model,'tot_ins_sup',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?></span></td>
-			<td><span class="form"><?php echo $form->textField($model,'tot_ins_sin',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?></span></td>
-			<td><span class="form"><?php echo $form->textField($model,'tot_ins_tar',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?></span></td>
-			<td><span class="form"><?php echo $form->textField($model,'tot_ins_com',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?></span></td>
-			<td><span class="form"><?php echo $form->textField($model,'tot_ins_lic',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?></span></td>
-			<td><span class="form"><?php echo $form->textField($model,'tot_ins_con',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_dic_con <> 0 ?  $model->tot_dic_con : 0));?></span></td>
+			<td><span class="form"><?php echo $form->textField($model,'tot_hor_ins',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_hor_ins <> 0 ?  $model->tot_hor_ins : 0));?></span></td>
+			<td><span class="form"><?php echo $form->textField($model,'tot_ins_tit',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_ins_tit <> 0 ?  $model->tot_ins_tit : 0));?></span></td>
+			<td><span class="form"><?php echo $form->textField($model,'tot_ins_int',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_ins_int <> 0 ?  $model->tot_ins_int : 0));?></span></td>
+			<td><span class="form"><?php echo $form->textField($model,'tot_ins_tra',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_ins_tra <> 0 ?  $model->tot_ins_tra : 0));?></span></td>
+			<td><span class="form"><?php echo $form->textField($model,'tot_ins_sup',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_ins_sup <> 0 ?  $model->tot_ins_sup : 0));?></span></td>
+			<td><span class="form"><?php echo $form->textField($model,'tot_ins_sin',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_ins_sin <> 0 ?  $model->tot_ins_sin : 0));?></span></td>
+			<td><span class="form"><?php echo $form->textField($model,'tot_ins_tar',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_ins_tar <> 0 ?  $model->tot_ins_tar : 0));?></span></td>
+			<td><span class="form"><?php echo $form->textField($model,'tot_ins_com',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_ins_com <> 0 ?  $model->tot_ins_com : 0));?></span></td>
+			<td><span class="form"><?php echo $form->textField($model,'tot_ins_lic',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_ins_lic <> 0 ?  $model->tot_ins_lic : 0));?></span></td>
+			<td><span class="form"><?php echo $form->textField($model,'tot_ins_con',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_ins_con <> 0 ?  $model->tot_ins_con : 0));?></span></td>
 		</tr>
   </table>
 <?php $this->endWidget(); ?>

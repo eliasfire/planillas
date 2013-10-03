@@ -109,7 +109,8 @@ class EgbController extends GxController {
 		$establecimiento = Establecimiento::model()->find('id_establecimiento = :id_uno',array(':id_uno'=>Yii::app()->getSession()->get('id_establecimiento')));
 		$responsable = Responsable::model()->find('id_responsable = :id_est', array(':id_est'=>$establecimiento->id_responsable));
 		$localizacion = Localizacion::model()->find('id_localizacion = :id_uno',array(':id_uno'=>$model->id_localizacion));
-						
+		Yii::app()->getSession()->add('id_localizacion',$localizacion->id_localizacion);
+		
 		if ($model->confirmado == 1) {
 			  Yii::app()->user->setFlash('error', '<strong>Planilla ya confirmada!</strong> No se puede modificar.');
 			  $this->redirect(array('admin', 'id' => $model->id_planilla));

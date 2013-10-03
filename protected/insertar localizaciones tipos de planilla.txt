@@ -95,3 +95,48 @@ Where
   oferta_tipo.c_oferta_base = 2 And
   oferta_local.c_estado = 1) Or
   (oferta_tipo.c_oferta_base = 19)
+
+//localizaciones comun-primaria
+
+SELECT DISTINCT 
+  establecimiento.cue,
+  establecimiento.id_establecimiento,
+  establecimiento.nombre,
+  localizacion.id_localizacion,
+  public.oferta_tipo.c_oferta,
+  public.oferta_tipo.descripcion,
+  public.modalidad1_tipo.descripcion
+FROM
+  establecimiento
+  INNER JOIN localizacion ON (establecimiento.id_establecimiento = localizacion.id_establecimiento)
+  INNER JOIN public.oferta_local ON (localizacion.id_localizacion = public.oferta_local.id_localizacion)
+  INNER JOIN public.oferta_tipo ON (public.oferta_local.c_oferta = public.oferta_tipo.c_oferta)
+  INNER JOIN public.modalidad1_tipo ON (public.oferta_tipo.c_modalidad1 = public.modalidad1_tipo.c_modalidad1)
+WHERE
+  establecimiento.c_estado = 1 AND 
+  localizacion.c_estado = 1 AND 
+  public.oferta_local.c_estado = 1 AND 
+  public.oferta_tipo.c_oferta = 102
+
+//establecimientos y localizaciones con nivel comun-INICIAL
+
+SELECT DISTINCT 
+  establecimiento.cue,
+  establecimiento.id_establecimiento,
+  establecimiento.nombre,
+  localizacion.id_localizacion,
+  public.oferta_tipo.descripcion,
+  public.modalidad1_tipo.descripcion
+FROM
+  establecimiento
+  INNER JOIN localizacion ON (establecimiento.id_establecimiento = localizacion.id_establecimiento)
+  INNER JOIN public.oferta_local ON (localizacion.id_localizacion = public.oferta_local.id_localizacion)
+  INNER JOIN public.oferta_tipo ON (public.oferta_local.c_oferta = public.oferta_tipo.c_oferta)
+  INNER JOIN public.modalidad1_tipo ON (public.oferta_tipo.c_modalidad1 = public.modalidad1_tipo.c_modalidad1)
+  INNER JOIN public.oferta_base_tipo ON (public.oferta_tipo.c_oferta_base = public.oferta_base_tipo.c_oferta_base)
+WHERE
+  localizacion.id_establecimiento NOT IN (SELECT localizacion_planilla.id_establecimiento FROM localizacion_planilla) AND 
+  establecimiento.c_estado = 1 AND 
+  localizacion.c_estado = 1 AND 
+  public.oferta_base_tipo.c_oferta_base = 17 OR 
+  public.oferta_base_tipo.c_oferta_base = 1

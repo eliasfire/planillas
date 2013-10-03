@@ -691,7 +691,7 @@ class IngresadorController extends GxController {
 	    }
 	    
 	    
-	   //echo $tipo;
+	   echo $tipo;
 	   // echo Yii::app()->getSession()->get('id_establecimiento');
 	    Yii::app()->getSession()->add('tipo',$tipo);
 	    
@@ -767,11 +767,11 @@ class IngresadorController extends GxController {
 	public function actionImprimirEstablecimiento(){//por ejemplo
 	
 		$model=$this->loadModel(Yii::app()->getSession()->get('id_datos_est'),'Datosest');
-		
+		/* 
 		echo "<PRE>";
 		print_r($model);
 		echo "</PRE>"; 
-		
+		 */
 		$establecimiento=Establecimiento::model()->find(array(
 				'select'=>'nombre,cue,id_responsable',
 				'condition'=>'id_establecimiento=:id_establecimiento',
@@ -784,66 +784,322 @@ class IngresadorController extends GxController {
 				'params'=>array(':id_responsable'=>$establecimiento['id_responsable']),
 		));
 		
-		if (Yii::app()->getSession()->get('tipo') == '1')
-				{
-					$aEstructuraDeCadaLineaGrilla = array(
-							'total' => $model['tot_dic_cla'],
-							'titular' => $model['tot_dic_tit'],
-							'interina' => $model['tot_dic_int'],
-							'transitoria' => $model['tot_dic_tra'],
-							'suplente' => $model['tot_dic_sup'],
-							'sinCubrir' => $model['tot_dic_sin'],
-							'pasiva' => $model['tot_dic_pas'],
-							'adscripta' => $model['tot_dic_lic'],
-							'contrato' => $model['tot_dic_con'],
-					);
-					$aEstructuraDeCadaLineaGrilla1 = array(
-							'total' => $model['tot_jar_mat'],
-							'titular' => $model['tot_mat_tit'],
-							'interina' => $model['tot_mat_int'],
-							'transitoria' => $model['tot_mat_tra'],
-							'suplente' => $model['tot_mat_sup'],
-							'sinCubrir' => $model['tot_mat_sin'],
-							'pasiva' => $model['tot_mat_pas'],
-							'adscripta' => $model['tot_mat_lic'],
-							'contrato' => $model['tot_mat_con'],
-					);
-					$aEstructuraDeCadaLineaGrilla2 = array(
-							'total' => $model['tot_jar_inf'],
-							'titular' => $model['tot_inf_tit'],
-							'interina' => $model['tot_inf_int'],
-							'transitoria' => $model['tot_inf_tra'],
-							'suplente' => $model['tot_inf_sup'],
-							'sinCubrir' => $model['tot_inf_sin'],
-							'pasiva' => $model['tot_inf_pas'],
-							'adscripta' => $model['tot_inf_lic'],
-							'contrato' => $model['tot_inf_con'],
-					);
-					$aEstructuraDeCadaLineaGrilla3 = array(
-							'total' => $model['tot_act_fun'],
-							'titular' => $model['tot_fun_tit'],
-							'interina' => $model['tot_fun_int'],
-							'transitoria' => $model['tot_fun_tra'],
-							'suplente' => $model['tot_fun_sup'],
-							'sinCubrir' => $model['tot_fun_sin'],
-							'pasiva' => $model['tot_fun_pas'],
-							'adscripta' => $model['tot_fun_lic'],
-							'contrato' => $model['tot_fun_con'],
-					);
-				}
 
-	
-		$nombreSeccion= '"nombreSeccion"';
-		$tipoSeccion= '"tipoSeccion"';
-		$matTotal='"matTotal"';
-		$matVaron='"matVaron"';
-		$matMujer='"matMujer"';
-	
-	$PDF = new PlanillaPDF();
+		$aEstructuraDeCadaLineaDictado = array(
+				'total' => $model['tot_dic_cla'],
+				'titular' => $model['tot_dic_tit'],
+				'interina' => $model['tot_dic_int'],
+				'transitoria' => $model['tot_dic_tra'],
+				'suplente' => $model['tot_dic_sup'],
+				'sinCubrir' => $model['tot_dic_sin'],
+				'pasiva' => $model['tot_dic_pas'],
+				'adscripta' => $model['tot_dic_com'],
+				'licencia' => $model['tot_dic_lic'],
+				'contrato' => $model['tot_dic_con'],
+		);
+		$aEstructuraDeCadaLineaJardinMaternal = array(
+				'total' => $model['tot_jar_mat'],
+				'titular' => $model['tot_mat_tit'],
+				'interina' => $model['tot_mat_int'],
+				'transitoria' => $model['tot_mat_tra'],
+				'suplente' => $model['tot_mat_sup'],
+				'sinCubrir' => $model['tot_mat_sin'],
+				'pasiva' => $model['tot_mat_pas'],
+				'adscripta' => $model['tot_mat_com'],
+				'licencia' => $model['tot_mat_lic'],
+				'contrato' => $model['tot_mat_con'],
+		);
+		$aEstructuraDeCadaLineaJardinInfantes = array(
+				'total' => $model['tot_jar_inf'],
+				'titular' => $model['tot_inf_tit'],
+				'interina' => $model['tot_inf_int'],
+				'transitoria' => $model['tot_inf_tra'],
+				'suplente' => $model['tot_inf_sup'],
+				'sinCubrir' => $model['tot_inf_sin'],
+				'pasiva' => $model['tot_inf_pas'],
+				'adscripta' => $model['tot_inf_com'],
+				'licencia' => $model['tot_inf_lic'],
+				'contrato' => $model['tot_inf_con'],
+		);
+		$aEstructuraDeCadaLineaPrimaria = array(
+				'total' => $model['tot_hor_egb'],
+				'titular' => $model['tot_egb_tit'],
+				'interina' => $model['tot_egb_int'],
+				'transitoria' => $model['tot_egb_tra'],
+				'suplente' => $model['tot_egb_sup'],
+				'sinCubrir' => $model['tot_egb_sin'],
+				'pasiva' => $model['tot_egb_pas'],
+				'adscripta' => $model['tot_egb_com'],
+				'licencia' => $model['tot_egb_lic'],
+				'contrato' => $model['tot_egb_con'],
+		);
+		$aEstructuraDeCadaLineaSecundaria = array(
+				'total' => $model['tot_hor_sec'],
+				'titular' => $model['tot_sec_tit'],
+				'interina' => $model['tot_sec_int'],
+				'transitoria' => $model['tot_sec_tra'],
+				'suplente' => $model['tot_sec_sup'],
+				'sinCubrir' => $model['tot_sec_sin'],
+				'pasiva' => $model['tot_sec_pas'],
+				'adscripta' => $model['tot_sec_com'],
+				'licencia' => $model['tot_sec_lic'],
+				'contrato' => $model['tot_sec_con'],
+		);
+		$aEstructuraDeCadaLineaSemi = array(
+				'total' => $model['tot_hor_sem'],
+				'titular' => $model['tot_sem_tit'],
+				'interina' => $model['tot_sem_int'],
+				'transitoria' => $model['tot_sem_tra'],
+				'suplente' => $model['tot_sem_sup'],
+				'sinCubrir' => $model['tot_sem_sin'],
+				'pasiva' => $model['tot_sem_tar'],
+				'adscripta' => $model['tot_sem_com'],
+				'licencia' => $model['tot_sem_lic'],
+				'contrato' => $model['tot_sem_con'],
+		);
+		$aEstructuraDeCadaLineaProyecto= array(
+				'total' => $model['tot_hor_pro'],
+				'titular' => $model['tot_pro_tit'],
+				'interina' => $model['tot_pro_int'],
+				'transitoria' => $model['tot_pro_tra'],
+				'suplente' => $model['tot_pro_sup'],
+				'sinCubrir' => $model['tot_pro_sin'],
+				'pasiva' => $model['tot_pro_tar'],
+				'adscripta' => $model['tot_pro_com'],
+				'licencia' => $model['tot_pro_lic'],
+				'contrato' => $model['tot_pro_con'],
+		);
+		$aEstructuraDeCadaLineaOtros = array(
+				'total' => $model['tot_act_fun'],
+				'titular' => $model['tot_fun_tit'],
+				'interina' => $model['tot_fun_int'],
+				'transitoria' => $model['tot_fun_tra'],
+				'suplente' => $model['tot_fun_sup'],
+				'sinCubrir' => $model['tot_fun_sin'],
+				'pasiva' => $model['tot_fun_tar'],
+				'adscripta' => $model['tot_fun_com'],
+				'licencia' => $model['tot_fun_lic'],
+				'contrato' => $model['tot_fun_con'],
+		);
+		$aEstructuraDeCadaLineaTotal = array(
+				'total' => $model['tot_hor_ins'],
+				'titular' => $model['tot_ins_tit'],
+				'interina' => $model['tot_ins_int'],
+				'transitoria' => $model['tot_ins_tra'],
+				'suplente' => $model['tot_ins_sup'],
+				'sinCubrir' => $model['tot_ins_sin'],
+				'pasiva' => $model['tot_ins_tar'],
+				'adscripta' => $model['tot_ins_com'],
+				'licencia' => $model['tot_ins_lic'],
+				'contrato' => $model['tot_ins_con'],
+		);
+		/* 		$aCicloHoras' = array(
+		 *       'dictado' => array(
+		 		*         'total' => int,
+		 		*         'titular' => int,
+		 		*         'interina'=> int,
+		 		*         'transitoria' => int,
+		 		*         'suplente' => int,
+		 		*         'sinCubrir' => int,
+		 		*         'pasiva' => int,
+		 		*         'adscripta' => int,
+		 		*         'licencia' => int,
+		 		*         'contrato' => int,
+		 		*       ),
+				*       'maternal' => array(//Idem Anterior),
+				*       'infantes' => array(//Idem Anterior),
+				*       'egb12' => array(//Idem Anterior),
+				*       'egb39' => array(//Idem Anterior),
+				*       'secundario' => array(//Idem Anterior),
+				*       'polimodal' => array(//Idem Anterior),
+				*       'otros' => array(//Idem Anterior),
+				*       'total' => array(//Idem Anterior),
+				* ); //Fin aCicloHoras
+		*/
+		if (Yii::app()->getSession()->get('tipo') == '1')
+		{//Sólo Inicial
+			//echo Yii::app()->getSession()->get('tipo');
+			$I = array(
+					'dictado' => $aEstructuraDeCadaLineaDictado,
+					'maternal' => $aEstructuraDeCadaLineaJardinMaternal,
+					'infantes' => $aEstructuraDeCadaLineaJardinInfantes,
+					'otros' => $aEstructuraDeCadaLineaOtros,
+					'total' => $aEstructuraDeCadaLineaTotal,
+			);
+			$aHoras = $I;
+		}
+		if (Yii::app()->getSession()->get('tipo') == '5')
+		{//Sólo primario
+			$P = array(
+					'dictado' => $aEstructuraDeCadaLineaDictado,
+					'primario' => $aEstructuraDeCadaLineaPrimaria,
+					'otros' => $aEstructuraDeCadaLineaOtros,
+					'total' => $aEstructuraDeCadaLineaTotal,
+			);
+			$aHoras = $P;
+		}
+		if (Yii::app()->getSession()->get('tipo') == '6')
+		{//Sólo Secundario
+			$S = array(
+					'dictado' => $aEstructuraDeCadaLineaDictado,
+					'secundario' => $aEstructuraDeCadaLineaSecundaria,
+					'otros' => $aEstructuraDeCadaLineaOtros,
+					'total' => $aEstructuraDeCadaLineaTotal,
+			);
+			$aHoras = $S;
+		}
+		if (Yii::app()->getSession()->get('tipo') == '51' or Yii::app()->getSession()->get('tipo')  == '15')
+		{//Inicial + Primario
+			$IP = array(
+					'dictado' => $aEstructuraDeCadaLineaDictado,
+					'maternal' => $aEstructuraDeCadaLineaJardinMaternal,
+					'infantes' => $aEstructuraDeCadaLineaJardinInfantes,
+					'primario' => $aEstructuraDeCadaLineaPrimaria,
+					'otros' => $aEstructuraDeCadaLineaOtros,
+					'total' => $aEstructuraDeCadaLineaTotal,
+			);
+			$aHoras = $IP;
+		}
+		if (Yii::app()->getSession()->get('tipo') == '56' or Yii::app()->getSession()->get('tipo') == '65')
+		{//Inicial + Secundario
+			$IS = array(
+					'dictado' => $aEstructuraDeCadaLineaDictado,
+					'maternal' => $aEstructuraDeCadaLineaJardinMaternal,
+					'infantes' => $aEstructuraDeCadaLineaJardinInfantes,
+					'secundario' => $aEstructuraDeCadaLineaSecundaria,
+					'otros' => $aEstructuraDeCadaLineaOtros,
+					'total' => $aEstructuraDeCadaLineaTotal,
+			);
+			$aHoras = $P;
+		}
+		if (Yii::app()->getSession()->get('tipo') == '156' or Yii::app()->getSession()->get('tipo') == '165' or Yii::app()->getSession()->get('tipo') == '615' or Yii::app()->getSession()->get('tipo') == '516' or Yii::app()->getSession()->get('tipo') == '651' or Yii::app()->getSession()->get('tipo') == '561')
+		{//Inicial + Primario + Secundario
+			$IPS = array(
+					'dictado' => $aEstructuraDeCadaLineaDictado,
+					'maternal' => $aEstructuraDeCadaLineaJardinMaternal,
+					'infantes' => $aEstructuraDeCadaLineaJardinInfantes,
+					'primario' => $aEstructuraDeCadaLineaPrimaria,
+					'secundario' => $aEstructuraDeCadaLineaSecundaria,
+					'otros' => $aEstructuraDeCadaLineaOtros,
+					'total' => $aEstructuraDeCadaLineaTotal,
+			);
+			$aHoras = $IPS;
+		}
+		if (Yii::app()->getSession()->get('tipo') == '2')
+		{//Sólo Primario ADULTOS
+			$PA = array(
+					'dictado' => $aEstructuraDeCadaLineaDictado,
+					'primario' => $aEstructuraDeCadaLineaPrimaria,
+					'primarioSemi' => $aEstructuraDeCadaLineaSemi,
+					'proyecto' => $aEstructuraDeCadaLineaProyecto,
+					'otros' => $aEstructuraDeCadaLineaOtros,
+					'total' => $aEstructuraDeCadaLineaTotal,
+			);
+			$aHoras = $PA;
+		}
+		if (Yii::app()->getSession()->get('tipo') == '7')
+		{//Sólo Secundario ADULTOS
+			$SA = array(
+					'dictado' => $aEstructuraDeCadaLineaDictado,
+					'secundario' => $aEstructuraDeCadaLineaSecundaria,
+					'secundarioSemi' => $aEstructuraDeCadaLineaSemi,
+					'proyecto' => $aEstructuraDeCadaLineaProyecto,
+					'otros' => $aEstructuraDeCadaLineaOtros,
+					'total' => $aEstructuraDeCadaLineaTotal,
+			);
+			$aHoras = $SA;
+		}
+		if (Yii::app()->getSession()->get('tipo') == '27' or Yii::app()->getSession()->get('tipo') == '72')
+		{//Primario ADULTOS + Secundario ADULTOS
+			$PSA = array(
+					'dictado' => $aEstructuraDeCadaLineaDictado,
+					'primario' => $aEstructuraDeCadaLineaPrimaria,
+					'primarioSemi' => $aEstructuraDeCadaLineaSemi,
+					'secundario' => $aEstructuraDeCadaLineaSecundaria,
+					'secundarioSemi' => $aEstructuraDeCadaLineaSemi,
+					'proyecto' => $aEstructuraDeCadaLineaProyecto,
+					'otros' => $aEstructuraDeCadaLineaOtros,
+					'total' => $aEstructuraDeCadaLineaTotal,
+			);
+			$aHoras = $PSA;
+		}
+		
+		$aEstructuraGrillaPersonal = array(
+				'total' => $model['tot_per_adm'],
+				'varon' => $model['tot_adm_var'],
+				'mujer' => $model['tor_adm_muj'],
+		);
+		$aEstructuraGrillaPersonal1 = array(
+				'total' => $model['tot_per_ser'],
+				'varon' => $model['tot_ser_var'],
+				'mujer' => $model['tot_ser_muj'],
+		);
+		$aEstructuraGrillaPersonal2 = array(
+				'total' => $model['tot_per_pla'],
+				'varon' => $model['tot_pla_var'],
+				'mujer' => $model['tot_pla_muj'],
+		);
+		$aEstructuraGrillaPersonal3 = array(
+				'total' => $model['tot_per_con'],
+				'varon' => $model['tot_con_var'],
+				'mujer' => $model['tot_con_muj'],
+		);
+		$aEstructuraGrillaPersonal4 = array(
+				'total' => $model['tot_per_ots'],
+				'varon' => $model['tot_ots_var'],
+				'mujer' => $model['tot_ots_muj'],
+		);
+		$aEstructuraGrillaPersonal5 = array(
+				'total' => $model['tot_per_nod'],
+				'varon' => $model['tot_per_var'],
+				'mujer' => $model['tot_per_muj'],
+		);
+		$aNoDocente = array(
+				'administrativo' => $aEstructuraGrillaPersonal,
+				'servicio' => $aEstructuraGrillaPersonal1,
+				'plan' => $aEstructuraGrillaPersonal2,
+				'contratado' => $aEstructuraGrillaPersonal3,
+				'otro' => array(
+						'concepto 1' => $aEstructuraGrillaPersonal4,
+						'concepto 2' => $aEstructuraGrillaPersonal4,
+						//'concepto n' => $aEstructuraGrillaPersonal,
+				),
+				'total' => $aEstructuraGrillaPersonal5,
+		);
+			
+		$aEstructuraGrillaPersonal6 = array(
+				'total' => $model['tot_doc_act'],
+				'varon' => $model['tot_act_var'],
+				'mujer' => $model['tot_act_muj'],
+		);
+		$aEstructuraGrillaPersonal7 = array(
+				'total' => $model['tot_per_pas'],
+				'varon' => $model['tot_pas_var'],
+				'mujer' => $model['tot_pas_muj'],
+		);
+		$aEstructuraGrillaPersonal8 = array(
+				'total' => $model['tot_doc_fun'],
+				'varon' => $model['tot_doc_var'],
+				'mujer' => $model['tot_doc_muj'],
+		);
+		$aEstructuraGrillaPersonal9 = array(
+				'total' => $model['tot_doc_otr'],
+				'varon' => $model['tot_otr_var'],
+				'mujer' => $model['tot_otr_muj'],
+		);
+		$aDocente = array(
+				'activo' => $aEstructuraGrillaPersonal6,
+				'pasivo' => $aEstructuraGrillaPersonal7,
+				'noPertenece' => $aEstructuraGrillaPersonal8,
+				'pertenece' => $aEstructuraGrillaPersonal9,
+		);
+
+		ob_end_clean();
+		$PDF = new PlanillaPDF();
 		$linea = '';
-		$sFecha = '';
-		$sMes = '';
-		$sAnio = '';
+		$sFecha = date("Y-m-d");
+		$sMes = strtoupper($model['mes']);
+		$sAnio = $model['anio'];
 		$aEstablecimiento = array(
 				'nombre' => $establecimiento['nombre'],
 				'localizacion' => '',
@@ -858,18 +1114,31 @@ class IngresadorController extends GxController {
 				'vice' => $model['vicedirector'],
 				'director' => $model['director'],
 		);
-/* 
-		$aCiclosAP['total'] = $aTotalAP[0];
-		$sArchivo = strtolower('AdultoPrimaria-'. date("Y-m-d")) . ".pdf";
-		$PDF->ImprimirPlanillaLocalizacion(//
+		/*  echo "<PRE>";
+		print_r($aEstablecimiento);
+		echo "</PRE>";
+		echo "<PRE>";
+		print_r($aDocente);
+		echo "</PRE>";
+		echo "<PRE>";
+		print_r($aNoDocente);
+		echo "</PRE>";
+		echo "<PRE>";
+		print_r($I);
+		echo "</PRE>"; */
+		$sTipo = 'I';
+		$sArchivo = strtolower('DatosEstablecimiento-'. date("Y-m-d")) . ".pdf";
+		$PDF->ImprimirPlanillaEstablecimiento(//
 				$sTipo, //
-				$sFecha, $sMes, //
+				$sFecha, //
+				$sMes, //
 				$sAnio, //
 				$aEstablecimiento, //
-				$aCiclosAP, //
-				$aDivisionAP, //
-				$aAlimentoAP, //
-				$sArchivo); */
+				$aHoras, //
+				$aNoDocente, //
+				$aDocente, //
+				$sArchivo); 
+ 
 	}
 
 }

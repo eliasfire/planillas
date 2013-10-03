@@ -266,7 +266,7 @@ abstract class BaseItinerario extends GxActiveRecord {
 	public function calcularMujeres($id)
 	{
 		
-		$items=ServicioComplementario::model()->findAll(array('condition'=>'id_planilla=:x', 'params'=>array(':x'=>$id)));
+		$items=Itinerario::model()->findAll(array('condition'=>'id_planilla=:x', 'params'=>array(':x'=>$id)));
 			
 			foreach($items as $i=>$item)
 			{

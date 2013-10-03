@@ -49,7 +49,100 @@
     ),
 ));?>
   
-  
+    <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+	'title' => 'Cantidad Total de Alumnos Matriculados',
+	'headerIcon' => 'icon-th-list',
+	'htmlOptions' => array('class'=>'bootstrap-widget-table')
+));?>
+  <style type="text/css">
+table.tableizer-table {
+	border: 1px solid #CCC;
+	font-family: Arial, Helvetica, sans-serif font-size :   12px;
+}
+
+.tableizer-table td {
+	padding: 4px;
+	margin: 3px;
+	border: 1px solid #ccc;
+}
+
+.tableizer-table th {
+	background-color: #104E8B;
+	/* color: #FFF; */
+	font-weight: bold;
+}
+    </style>
+</p>
+<p>&nbsp; </p>
+<table align="center" class="tableizer-table">
+	  <tr class="tableizer-firstrow">
+			<th bgcolor="#0066CC">ALUMNOS MATRICULADOS.</th>
+			<th bgcolor="#0066CC">&nbsp;</th>
+			<th colspan="5" bgcolor="#0066CC">ALUMNOS POR TURNO (si un alumno
+				concurre a más de un turno, contarlo en cada uno de ellos)</th>
+		</tr>
+		<tr>
+			<td bgcolor="#0066CC"><span class="ee"> Se debe contar a cada alumno
+					una sola vez--------&gt;</span></td>
+			<td bgcolor="#0066CC" class="ww">TOTAL</td>
+			<td bgcolor="#0066CC" class="ww">Mañana</td>
+			<td bgcolor="#0066CC" class="ww">Tarde</td>
+			<td bgcolor="#0066CC" class="ww">Vespertino</td>
+			<td bgcolor="#0066CC" class="ww">Noche</td>
+			<td bgcolor="#0066CC" class="ww">Doble</td>
+		</tr>
+		<tr>
+			<td>TOTAL de Alumnos matriculados en Itinerarios Formativos
+				exclusivamente:</td>
+			<td><?php echo $form->textField($model,'tot_alu_iti',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_alu_iti <> 0 ?  $model->tot_alu_iti : 0 ));?>
+			</td>
+			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_iti_man',array('class'=>'span1','value'=>$model->tot_iti_man <> 0 ?  $model->tot_iti_man : 0 ));?>
+			</td>
+			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_iti_tar',array('class'=>'span1','value'=>$model->tot_iti_tar <> 0 ?  $model->tot_iti_tar : 0 ));?>
+			</td>
+			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_iti_ves',array('class'=>'span1','value'=>$model->tot_iti_ves <> 0 ?  $model->tot_iti_ves : 0 ));?>
+			</td>
+			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_iti_noc',array('class'=>'span1','value'=>$model->tot_iti_noc <> 0 ?  $model->tot_iti_noc : 0 ));?>
+			</td>
+			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_iti_dob',array('class'=>'span1','value'=>$model->tot_iti_dob <> 0 ?  $model->tot_iti_dob : 0 ));?>
+			</td>
+		</tr>
+		<tr>
+			<td>TOTAL de Alumnos matriculados en Trayectos Técnicos Profesionales
+				exclusivamente:</td>
+			<td><?php echo $form->textField($model,'tot_alu_ttp',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_alu_ttp <> 0 ?  $model->tot_alu_ttp : 0 ));?>
+			</td>
+			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_ttp_man',array('class'=>'span1','value'=>$model->tot_ttp_man <> 0 ?  $model->tot_ttp_man : 0 ));?>
+			</td>
+			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_ttp_tar',array('class'=>'span1','value'=>$model->tot_ttp_tar <> 0 ?  $model->tot_ttp_tar : 0 ));?>
+			</td>
+			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_ttp_ves',array('class'=>'span1','value'=>$model->tot_ttp_ves <> 0 ?  $model->tot_ttp_ves : 0 ));?>
+			</td>
+			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_ttp_noc',array('class'=>'span1','value'=>$model->tot_ttp_noc <> 0 ?  $model->tot_ttp_noc : 0 ));?>
+			</td>
+			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_ttp_dob',array('class'=>'span1','value'=>$model->tot_ttp_dob <> 0 ?  $model->tot_ttp_dob : 0 ));?>
+			</td>
+		</tr>
+		<tr>
+			<td>Total de Alumnos en I.F. Y T.T.P.:</td>
+			<td><?php echo $form->textField($model,'tot_iti_ttp',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_iti_ttp <> 0 ?  $model->tot_iti_ttp : 0 ));?>
+			</td>
+			<td><?php echo $form->textField($model,'tot_alu_man',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_alu_man <> 0 ?  $model->tot_alu_man : 0 ));?>
+			</td>
+			<td><?php echo $form->textField($model,'tot_alu_tar',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_alu_tar <> 0 ?  $model->tot_alu_tar : 0 ));?>
+			</td>
+			<td><?php echo $form->textField($model,'tot_alu_ves',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_alu_ves <> 0 ?  $model->tot_alu_ves : 0 ));?>
+			</td>
+			<td><?php echo $form->textField($model,'tot_alu_noc',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_alu_noc <> 0 ?  $model->tot_alu_noc : 0 ));?>
+			</td>
+			<td><?php echo $form->textField($model,'tot_alu_dob',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_alu_dob <> 0 ?  $model->tot_alu_dob : 0 ));?>
+			</td>
+		</tr>
+	</table>
+
+
+	<p>
+	  <?php $this->endWidget();?>
   
   <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Itinerario Formativo',
@@ -266,101 +359,6 @@ table.tableizer-table {
 </style>
 
   
-  <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
-	'title' => 'Cantidad Total de Alumnos Matriculados',
-	'headerIcon' => 'icon-th-list',
-	'htmlOptions' => array('class'=>'bootstrap-widget-table')
-));?>
-  <style type="text/css">
-table.tableizer-table {
-	border: 1px solid #CCC;
-	font-family: Arial, Helvetica, sans-serif font-size :   12px;
-}
-
-.tableizer-table td {
-	padding: 4px;
-	margin: 3px;
-	border: 1px solid #ccc;
-}
-
-.tableizer-table th {
-	background-color: #104E8B;
-	/* color: #FFF; */
-	font-weight: bold;
-}
-    </style>
-</p>
-<p>&nbsp; </p>
-<table align="center" class="tableizer-table">
-	  <tr class="tableizer-firstrow">
-			<th bgcolor="#0066CC">ALUMNOS MATRICULADOS.</th>
-			<th bgcolor="#0066CC">&nbsp;</th>
-			<th colspan="5" bgcolor="#0066CC">ALUMNOS POR TURNO (si un alumno
-				concurre a más de un turno, contarlo en cada uno de ellos)</th>
-		</tr>
-		<tr>
-			<td bgcolor="#0066CC"><span class="ee"> Se debe contar a cada alumno
-					una sola vez--------&gt;</span></td>
-			<td bgcolor="#0066CC" class="ww">TOTAL</td>
-			<td bgcolor="#0066CC" class="ww">Mañana</td>
-			<td bgcolor="#0066CC" class="ww">Tarde</td>
-			<td bgcolor="#0066CC" class="ww">Vespertino</td>
-			<td bgcolor="#0066CC" class="ww">Noche</td>
-			<td bgcolor="#0066CC" class="ww">Doble</td>
-		</tr>
-		<tr>
-			<td>TOTAL de Alumnos matriculados en Itinerarios Formativos
-				exclusivamente:</td>
-			<td><?php echo $form->textField($model,'tot_alu_iti',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_alu_iti <> 0 ?  $model->tot_alu_iti : 0 ));?>
-			</td>
-			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_iti_man',array('class'=>'span1','value'=>$model->tot_iti_man <> 0 ?  $model->tot_iti_man : 0 ));?>
-			</td>
-			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_iti_tar',array('class'=>'span1','value'=>$model->tot_iti_tar <> 0 ?  $model->tot_iti_tar : 0 ));?>
-			</td>
-			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_iti_ves',array('class'=>'span1','value'=>$model->tot_iti_ves <> 0 ?  $model->tot_iti_ves : 0 ));?>
-			</td>
-			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_iti_noc',array('class'=>'span1','value'=>$model->tot_iti_noc <> 0 ?  $model->tot_iti_noc : 0 ));?>
-			</td>
-			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_iti_dob',array('class'=>'span1','value'=>$model->tot_iti_dob <> 0 ?  $model->tot_iti_dob : 0 ));?>
-			</td>
-		</tr>
-		<tr>
-			<td>TOTAL de Alumnos matriculados en Trayectos Técnicos Profesionales
-				exclusivamente:</td>
-			<td><?php echo $form->textField($model,'tot_alu_ttp',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_alu_ttp <> 0 ?  $model->tot_alu_ttp : 0 ));?>
-			</td>
-			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_ttp_man',array('class'=>'span1','value'=>$model->tot_ttp_man <> 0 ?  $model->tot_ttp_man : 0 ));?>
-			</td>
-			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_ttp_tar',array('class'=>'span1','value'=>$model->tot_ttp_tar <> 0 ?  $model->tot_ttp_tar : 0 ));?>
-			</td>
-			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_ttp_ves',array('class'=>'span1','value'=>$model->tot_ttp_ves <> 0 ?  $model->tot_ttp_ves : 0 ));?>
-			</td>
-			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_ttp_noc',array('class'=>'span1','value'=>$model->tot_ttp_noc <> 0 ?  $model->tot_ttp_noc : 0 ));?>
-			</td>
-			<td class="qq" bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_ttp_dob',array('class'=>'span1','value'=>$model->tot_ttp_dob <> 0 ?  $model->tot_ttp_dob : 0 ));?>
-			</td>
-		</tr>
-		<tr>
-			<td>Total de Alumnos en I.F. Y T.T.P.:</td>
-			<td><?php echo $form->textField($model,'tot_iti_ttp',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_iti_ttp <> 0 ?  $model->tot_iti_ttp : 0 ));?>
-			</td>
-			<td><?php echo $form->textField($model,'tot_alu_man',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_alu_man <> 0 ?  $model->tot_alu_man : 0 ));?>
-			</td>
-			<td><?php echo $form->textField($model,'tot_alu_tar',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_alu_tar <> 0 ?  $model->tot_alu_tar : 0 ));?>
-			</td>
-			<td><?php echo $form->textField($model,'tot_alu_ves',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_alu_ves <> 0 ?  $model->tot_alu_ves : 0 ));?>
-			</td>
-			<td><?php echo $form->textField($model,'tot_alu_noc',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_alu_noc <> 0 ?  $model->tot_alu_noc : 0 ));?>
-			</td>
-			<td><?php echo $form->textField($model,'tot_alu_dob',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_alu_dob <> 0 ?  $model->tot_alu_dob : 0 ));?>
-			</td>
-		</tr>
-	</table>
-
-
-	<p>
-	  <?php $this->endWidget();?>
-	  
 	  <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Datos de ingreso',
 	'headerIcon' => 'icon-th-list',
