@@ -1,5 +1,5 @@
 <?php
-
+Yii::import('application.vendor.fpdf.*');
 require_once('fpdf.php');
 
 class PDF extends FPDF {

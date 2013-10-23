@@ -505,6 +505,7 @@ h2 small {
 h3 {
   font-size: 18px;
   line-height: 27px;
+  color: #0077F8;
 }
 
 h3 small {
@@ -5006,3 +5007,5 @@ a.badge:hover {
 .invisible {
   visibility: hidden;
 }
+
+.bootstrap-widget-header h3 { color: #0088cc !important; }

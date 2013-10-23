@@ -38,8 +38,8 @@ class SiteController extends Controller
 		
 		Yii::app()->getSession()->add('mesvigente',$mesvigente);
 		Yii::app()->getSession()->add('aniovigente',$aniovigente);
-		
-		$this->render('index');
+		$this->redirect(array('/ingresador/selectlocalizacion'));
+		//$this->render('index');
 		}
 		else $this->render('index');
 	}

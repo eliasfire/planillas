@@ -114,7 +114,7 @@ span.required { color:#ff0000; }
 
 /* Responsive Tables */
 table th { font-weight: bold; }
-table td, table th { padding: 9px 10px; /* text-align: left; */ }
+table td, table th { padding: 9px 10px; text-align: left; }
 
 /* Mobile */
 @media only screen and (max-width: 767px) {
