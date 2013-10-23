@@ -535,13 +535,11 @@ class IngresadorController extends GxController {
 	
 			if($model->id_localizacion != null)
 			{
+				$localizacion = Localizacion::model()->findByPk($model->id_localizacion);
 				Yii::app()->getSession()->add('id_localizacion',$model->id_localizacion);
+				Yii::app()->getSession()->add('nombre_localizacion',$localizacion->nombre);
+				Yii::app()->getSession()->add('anexo',$localizacion->anexo);
 				$this->redirect(array('selectplanilla'));
-				
-					/* echo "<PRE>";
-					print_r($_POST['SelectLocalizacion']);
-					echo "</PRE>"; 
-					echo $model->id_localizacion; */
 			}
 			else
 			{

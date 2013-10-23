@@ -1,56 +1,5 @@
-<style type="text/css">
-#contenedor {
-	overflow: hidden;
-}
+<?php echo $this->renderPartial('/ingresador/_datosglobales'); ?>
 
-#izquierda {
-	float: left;
-	color: #fff;
-}
-
-#derecha {
-	float: right;
-	color: #fff;
-}
-</style>
-
-<div id="contenedor">
-	<div id="izquierda">
-		<?php if (!Yii::app()->user->isGuest) {
-
-			$this->widget(
-				'bootstrap.widgets.TbLabel',
-				array(
-						'type' => 'success',
-						'label' => 'Establecimiento: '. Yii::app()->getSession()->get('nombre_establecimiento'),
-				)
-		);
-	}?>
-
-	</div>
-	<div id="derecha">
-		<?php 		
-		if(!Yii::app()->user->isGuest and isset(Yii::app()->user->last_login)){
-			$this->widget(
-				'bootstrap.widgets.TbLabel',
-				array(
-						'type' => 'important',
-						'label' => 'Mes vigente: ' . Yii::app()->getSession()->get('mesvigente') . '  ',
-				)
-		);
-		}
-		if(!Yii::app()->user->isGuest and isset(Yii::app()->user->last_login)){
-		$this->widget(
-				'bootstrap.widgets.TbLabel',
-				array(
-						'type' => 'inverse',
-						'label' => 'Año vigente: ' . Yii::app()->getSession()->get('aniovigente'),
-				)
-		);
-		}?>
-
-	</div>
-</div>
 <?php
 $this->breadcrumbs=array(
 	'Planillas'=>array('index'),
@@ -72,8 +21,6 @@ $('.search-form form').submit(function(){
 ?>
 
 <h1> <?php echo Yii::t('app', 'Planillas'); ?> Ingresadas <small><?php echo Yii::t('app', 'Manage'); ?></small></h1>
-
-<p> Si lo desea, puede introducir un operador de comparacion (&lt;, &lt;=, &gt;, &gt;=, &lt;&gt; or =) al comienzo de cada uno de los valores de su busqueda para especificar como la comparacion se debe hacer.</p>
 
 <!-- <div class="btn-toolbar"> -->
 <!--     <div class="btn-group"> -->
