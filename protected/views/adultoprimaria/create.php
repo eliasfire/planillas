@@ -791,7 +791,7 @@ Yii::app()->getClientScript()->registerScript('myscript41','$(
 	}); 
    </script>
    	
-<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+<?php /*$box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Encabezado de la Planila',
 	'headerIcon' => 'icon-home',
 	// when displaying a table, if we include bootstra-widget-table class
@@ -811,7 +811,7 @@ Yii::app()->getClientScript()->registerScript('myscript41','$(
  
      </div>   
  </div>     
- <?php $this->endWidget();?>
+ <?php $this->endWidget();*/?>
  <?php $this->endWidget(); ?>
 </div>
      

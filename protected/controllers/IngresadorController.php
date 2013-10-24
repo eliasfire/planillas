@@ -661,13 +661,13 @@ class IngresadorController extends GxController {
 		 if (empty($localizacion))
 		{
 			Yii::app()->user->setFlash('error', '<strong>Error!</strong> Seleccione la Localizacion SEDE (Anexo 00) en el menu Ingresador->Cargar Planilla he intentelo nuevamente');
-			$this->redirect(array('/'));
+			$this->redirect(array('/site/index'));
 		} 
 		
 		 if (!($localizacion->anexo == '00'))
 		{
 			Yii::app()->user->setFlash('error', '<strong>Error!</strong> Los datos del establecimiento solo pueden ser llenados por la localizacion SEDE (Anexo 00)');
-			$this->redirect(array('/'));
+			$this->redirect(array('/site/index'));
 		} 
 		
 	    if (isset($_POST['Datosest'])) {
@@ -689,7 +689,7 @@ class IngresadorController extends GxController {
 	    }
 	    
 	    
-	   echo $tipo;
+	   //echo $tipo;
 	   // echo Yii::app()->getSession()->get('id_establecimiento');
 	    Yii::app()->getSession()->add('tipo',$tipo);
 	    

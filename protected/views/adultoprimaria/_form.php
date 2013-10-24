@@ -77,8 +77,7 @@
 	$cs->registerCoreScript('jquery.ui');
 	$cs->registerCssFile(Yii::app()->request->baseUrl.'/css/bootstrap/jquery-ui.css');?>	
   
-  
-</p>
+
 <table class="linear" cellspacing="0" >
   <?php
 	

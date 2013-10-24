@@ -10,6 +10,9 @@
 .printableArea .tableizer-table tr td {
 	font-weight: bold;
 }
+.printableArea .tableizer-table {
+	font-weight: bold;
+}
 </style>
 
 
@@ -254,8 +257,8 @@ table.tableizer-table {
 	border: 1px solid #ccc;
 }
 .tableizer-table th {
-	background-color: #c3d9ff; 
-	color: rgb(2, 2, 2);
+	background-color: #104E8B; 
+	color: #FFF;
 	font-weight: bold;
 }
   </style>
@@ -303,14 +306,13 @@ table.tableizer-table {
 ));?>
   </p>
   
-	
  <style type="text/css">
 table.tableizer-table {
 	border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
+
 } 
 .tableizer-table td {
-	padding: 4px;
+	padding: 15px 15px 8px 10px;
 	margin: 3px;
 	border: 1px solid #ccc;
 }
@@ -319,28 +321,28 @@ table.tableizer-table {
 	color: #FFF;
 	font-weight: bold;
 }
-</style>
+  </style>
 
 	<table align="center" class="tableizer-table">
 		<tr class="tableizer-firstrow">
-			<td width="254" bgcolor="#104E8B"><span class="">CANTIDAD DE BENEFICIARIOS DE SERVICIOS DE ALIMENTACION</span></td>
-			<td width="48" bgcolor="#104E8B" class="">TOTAL</td>
+			<th width="254" >CANTIDAD DE BENEFICIARIOS DE SERVICIOS DE ALIMENTACION</th>
+			<th width="48"  >TOTAL</th>
 	  </tr>
 		<tr>
-			<td bgcolor="#FFFFFF">ALMUERZO</td>
-			<td bgcolor="#99FFCC"><?php echo $model->tot_alm_ben;?></td>
+		  <td bgcolor="#FFFFFF">ALMUERZO</td>
+			<td bgcolor="#99FFCC" style="text-align: center"><?php echo $model->tot_alm_ben;?></td>
 	  </tr>
 		<tr>
-			<td bgcolor="#FFFFFF">COPA DE LECHE</td>
-			<td bgcolor="#99FFCC"><?php echo $model->tot_cop_man;?></td>
+		  <td bgcolor="#FFFFFF">COPA DE LECHE</td>
+			<td bgcolor="#99FFCC" style="text-align: center"><?php echo $model->tot_cop_man;?></td>
 	  </tr>
 		<tr>
-			<td bgcolor="#FFFFFF">REFRIGERIO / MERIENDA REFORZADA: </td>
-			<td bgcolor="#99FFCC"><?php echo $model->tot_ref_man;?></td>
+		  <td bgcolor="#FFFFFF">REFRIGERIO / MERIENDA REFORZADA: </td>
+			<td bgcolor="#99FFCC" style="text-align: center"><?php echo $model->tot_ref_man;?></td>
 	  </tr>
 		<tr>
 		  <td bgcolor="#FFFFFF">Otros Servicios Alimentarios</td>
-		  <td bgcolor="#99FFCC"><?php echo $model->tot_ref_tar;?></td>
+		  <td bgcolor="#99FFCC" style="text-align: center"><?php echo $model->tot_ref_tar;?></td>
 	  </tr>
 	</table>
 

@@ -68,7 +68,7 @@
     ),
 ));?>
 	
-	<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+	<?php /*$box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Encabezado de la Planila',
 	'headerIcon' => 'icon-home',
 	// when displaying a table, if we include bootstra-widget-table class
@@ -87,7 +87,7 @@
       <span class="span5"><?php echo $form->textFieldRow($localizacion,'nombre',array('class'=>'span4',"disabled"=>"disabled"));?></span>
       <span class="span4"><?php echo $form->textFieldRow($localizacion,'anexo',array('class'=>'span1',"disabled"=>"disabled"));?></span>    </div>   
  </div>
-<?php $this->endWidget();?>
+<?php $this->endWidget();*/?>
 	
 	<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Datos de la Planila',
