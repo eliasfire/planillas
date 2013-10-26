@@ -532,3 +532,9 @@ $('#Planilla_tot_ttp_ves').keyup(sumar2);
 $('#Planilla_tot_ttp_noc').keyup(sumar2);
 $('#Planilla_tot_ttp_dob').keyup(sumar2);
 </script>
+
+<script type="text/javascript">
+$(document).on('ready',function(){
+	$('#id_detalle').trigger("click");
+	});
+</script>

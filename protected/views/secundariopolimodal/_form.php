@@ -405,3 +405,9 @@ $('#Planilla_tot_mul_sex').keyup(sumar2);
 $('#Planilla_tot_mul_pex').keyup(sumar2);
 
 </script>
+
+<script type="text/javascript">
+$(document).on('ready',function(){
+	$('#id_detalle').trigger("click");
+	});
+</script>

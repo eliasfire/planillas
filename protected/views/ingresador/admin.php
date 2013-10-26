@@ -2,22 +2,22 @@
 
 <?php
 $this->breadcrumbs=array(
-	'Planillas'=>array('index'),
+		'Planillas'=>array('index'),
 	 Yii::t('app', 'Manage'),
 );
 
 Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
+	 		$('.search-button').click(function(){
+	 		$('.search-form').toggle();
+	 		return false;
 });
-$('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('planilla-grid', {
-		data: $(this).serialize()
-	});
-	return false;
+	 		$('.search-form form').submit(function(){
+	 		$.fn.yiiGridView.update('planilla-grid', {
+	 		data: $(this).serialize()
 });
-");
+	 		return false;
+});
+	 		");
 ?>
 
 <h1> <?php echo Yii::t('app', 'Planillas'); ?> Ingresadas <small><?php echo Yii::t('app', 'Manage'); ?></small></h1>
@@ -71,11 +71,12 @@ $('.search-form form').submit(function(){
 		/*'id_planilla',*/
 		'mes',
 		'anio',
-		array(
+/* 		array(
 			'header'=>'Id Establecimiento',
 			'name'=>'id_establecimiento',
-		),
+		), */
 		array(
+			'header'=>'Establecimiento',
 			'name'=>'id_establecimiento',
 			'value'=>'GxHtml::valueEx($data->idEstablecimiento)',
 			//'filter'=>GxHtml::listDataEx(Establecimiento::model()->findAllAttributes(null, true)),
@@ -92,6 +93,7 @@ $('.search-form form').submit(function(){
 			'value'=>'GxHtml::valueEx($data->idLocalizacion->anexo)',
 		),	 */		
 		array(
+			'header'=>'Tipo Planilla',
 			'name'=>'id_tipo_planilla',
 			'value'=>'GxHtml::valueEx($data->idTipoPlanilla)',
 			'filter'=>GxHtml::listDataEx(TipoPlanilla::model()->findAllAttributes(null, true)),

@@ -460,3 +460,9 @@ $('#Planilla_tot_ind_pri').keyup(sumar2);
 $('#Planilla_tot_mul_alf').keyup(sumar2);
 $('#Planilla_tot_mul_pri').keyup(sumar2);
 </script>
+
+<script type="text/javascript">
+$(document).on('ready',function(){
+	$('#id_detalle').trigger("click");
+	});
+</script>

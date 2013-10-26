@@ -312,3 +312,9 @@ $('#Planilla_alu_obl_var').keyup(sumar2);
 $('#Planilla_tot_act_muj').keyup(sumar2);
 $('#Planilla_alu_obl_muj').keyup(sumar2);
 </script>
+
+<script type="text/javascript">
+$(document).on('ready',function(){
+	$('#id_detalle').trigger("click");
+	});
+</script>

@@ -437,7 +437,7 @@
     type="text/javascript">
 	jQuery(function($) {	jQuery('body').on('change','#Adulto_id_nivel49',
 	function(){jQuery.ajax({ 'type':'POST', 'url':'/planillas/Planilla/Selectnivel', 'cache':false, 'data': {id: $(this).attr('value')}, 
-		'success':function(html){jQuery("#Adulto_id_sala_ciclo_anio49.html(html)}});
+		'success':function(html){jQuery("#Adulto_id_sala_ciclo_anio49").html(html)}});
     return false;});
 	}); 
    </script>
@@ -481,4 +481,5 @@
 			'establecimiento' => $establecimiento,
 		    'responsable'=>	$responsable
 		)); ?>
+
 

@@ -77,8 +77,6 @@
 	$cs->registerCoreScript('jquery');
 	$cs->registerCoreScript('jquery.ui');
 	$cs->registerCssFile(Yii::app()->request->baseUrl.'/css/bootstrap/jquery-ui.css');?>	
-  
-  
 </p>
 <table class="linear" cellspacing="0" >
   <?php
@@ -449,3 +447,8 @@ $('#Planilla_tot_mul_jix').keyup(sumar2);
 $('#Planilla_tot_mul_imx').keyup(sumar2);
 </script>
 
+<script type="text/javascript">
+$(document).on('ready',function(){
+	$('#id_detalle').trigger("click");
+	});
+</script>
