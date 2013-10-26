@@ -92,6 +92,8 @@
 ));?>
 
 <div id="yw116"><div class="alert in alert-block fade alert-error"><strong>Importante!</strong> Campos con <span class="required">*</span> son requeridos.</div></div>
+    <?php echo $form->errorSummary($model,'Opps!!!', null,array('class'=>'alert alert-error span10')); ?>
+
 <?php
      $this->widget('bootstrap.widgets.TbAlert'); 
 

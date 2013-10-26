@@ -59,7 +59,7 @@
     ),
 ));?>
 	
-	<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+	<?php /*$box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Encabezado de la Planilla',
 	'headerIcon' => 'icon-home',
 	// when displaying a table, if we include bootstra-widget-table class
@@ -79,7 +79,7 @@
  
     </div>   
  </div>   
- <?php $this->endWidget();?>
+ <?php $this->endWidget();*/?>
 	
 	<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Datos de la Planilla',
@@ -88,6 +88,8 @@
 ));?>
 
 <div id="yw116"><div class="alert in alert-block fade alert-error"><strong>Importante!</strong> Campos con <span class="required">*</span> son requeridos.</div></div>
+    <?php echo $form->errorSummary($model,'Opps!!!', null,array('class'=>'alert alert-error span10')); ?>
+
 <?php
      $this->widget('bootstrap.widgets.TbAlert'); 
 	//echo $form->errorSummary(array_merge(array($model),$validatedDetalles));
