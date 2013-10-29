@@ -538,3 +538,14 @@ $(document).on('ready',function(){
 	$('#id_detalle').trigger("click");
 	});
 </script>
+
+<script type="text/javascript">
+$('input').keydown( function(e) {
+    var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
+    if(key == 13) {
+        e.preventDefault();
+        var inputs = $(this).closest('form').find(':input:visible');
+        inputs.eq( inputs.index(this)+ 1 ).focus();
+    }
+});
+</script>

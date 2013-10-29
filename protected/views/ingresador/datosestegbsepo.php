@@ -1367,6 +1367,15 @@ $('#Datosest_tot_pol_sin').keyup(sumar2);
 $('#Datosest_tot_fun_sin').keyup(sumar2);
 </script>
 
-
+<script type="text/javascript">
+$('input').keydown( function(e) {
+    var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
+    if(key == 13) {
+        e.preventDefault();
+        var inputs = $(this).closest('form').find(':input:visible');
+        inputs.eq( inputs.index(this)+ 1 ).focus();
+    }
+});
+</script>
 
 
