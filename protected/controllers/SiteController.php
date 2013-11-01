@@ -41,7 +41,7 @@ class SiteController extends Controller
 		$this->redirect(array('/ingresador/selectlocalizacion'));
 		//$this->render('index');
 		}
-		else $this->render('index');
+		else $this->redirect(array('/site/login'));
 	}
 
 	/**
