@@ -33,7 +33,7 @@ class SiteController extends Controller
 		Yii::app()->getSession()->add('nombre_establecimiento',$establecimiento->nombre);
 		Yii::app()->getSession()->add('id_establecimiento',$establecimiento->id_establecimiento);
 		
-		$mesvigente='Marzo';
+		$mesvigente='Septiembre';
 		$aniovigente=2013;
 		
 		Yii::app()->getSession()->add('mesvigente',$mesvigente);

@@ -95,7 +95,7 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'class'=>'RWebUser',
-			'allowAutoLogin'=>false,
+			'allowAutoLogin'=>true,
 		),
 			
 		

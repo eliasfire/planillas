@@ -75,4 +75,45 @@ abstract class BaseNivelServicio extends GxActiveRecord {
 			'criteria' => $criteria,
 		));
 	}
+	
+	public function SelectNivel()
+	{
+		$id_localizacion= Yii::app()->getSession()->get('id_localizacion');
+	
+	
+		$sql = "Select
+		orientacion_tipo.c_orientacion,
+		orientacion_tipo.descripcion
+		From
+		oferta_local Inner Join
+		oferta_tipo On oferta_local.c_oferta = oferta_tipo.c_oferta Inner Join
+		localizacion On oferta_local.id_localizacion = localizacion.id_localizacion
+		Inner Join
+		establecimiento On localizacion.id_establecimiento =
+		establecimiento.id_establecimiento Inner Join
+		estado_tipo On oferta_local.c_estado = estado_tipo.c_estado And
+		localizacion.c_estado = estado_tipo.c_estado And establecimiento.c_estado =
+		estado_tipo.c_estado Inner Join
+		titulo_oferta_tipo On titulo_oferta_tipo.c_oferta = oferta_tipo.c_oferta
+		Inner Join
+		titulo_tipo On titulo_oferta_tipo.c_titulo = titulo_tipo.c_titulo Inner Join
+		plan_estudio_local On plan_estudio_local.id_oferta_local =
+		oferta_local.id_oferta_local And plan_estudio_local.c_titulo_oferta =
+		titulo_oferta_tipo.c_titulo_oferta Inner Join
+		plan_estudio_local_secundaria
+		On plan_estudio_local_secundaria.id_plan_estudio_local =
+		plan_estudio_local.id_plan_estudio_local Inner Join
+		orientacion_tipo On plan_estudio_local_secundaria.c_orientacion =
+		orientacion_tipo.c_orientacion
+		Where
+		localizacion.id_localizacion = '$id_localizacion' And
+		oferta_local.c_estado = 1 And
+		plan_estudio_local.c_requisito <> 2 ";
+	
+		$connection = Yii::app()->db;
+		$command = $connection->createCommand($sql);
+		$lista = $command->queryAll();
+		return $lista;
+	
+	}
 }

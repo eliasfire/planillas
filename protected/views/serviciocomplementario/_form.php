@@ -202,7 +202,7 @@ table.tableizer-table {
  <div class="control-group">		
 	<div class="span11">    
     <span class="span5"><?php echo $form->textFieldRow($model,'ingresador');?></span>
-    <span class="span5"><?php echo $form->textFieldRow($responsable,'apellido',array("disabled"=>"disabled"));?></span>
+    <span class="span5"><?php /*echo $form->textFieldRow($responsable,'apellido',array("disabled"=>"disabled"));*/?></span>
    
     </div>   
 </div>   

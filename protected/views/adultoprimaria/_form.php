@@ -202,19 +202,19 @@ table.tableizer-table {
 	<th>Primario</th>
 	</tr>
  <tr>
- <td>Independientes   </td>
+ <td><span class="aa">Independientes </span>  </td>
    <td>&nbsp;<?php echo $form->textField($model,'alu_tot_ind',array('class'=>'span1','readonly'=>'readonly','value'=>$model->alu_tot_ind <> 0 ?  $model->alu_tot_ind : 0));?></td>
    <td bgcolor="#99FFCC">&nbsp;<?php echo $form->textField($model,'tot_ind_alf',array('class'=>'span1','value'=>$model->tot_ind_alf <> 0 ?  $model->tot_ind_alf : 0));?></td>
    <td bgcolor="#99FFCC">&nbsp;<?php echo $form->textField($model,'tot_ind_pri',array('class'=>'span1','value'=>$model->tot_ind_pri <> 0 ?  $model->tot_ind_pri : 0));?></td>
    </tr>
  <tr>
-   <td>Múltiples   </td>
+   <td><span class="aa">Múltiples </span>  </td>
    <td>&nbsp;<?php echo $form->textField($model,'alu_tot_mul',array('class'=>'span1','readonly'=>'readonly','value'=>$model->alu_tot_mul <> 0 ?  $model->alu_tot_mul : 0));?></td>
    <td bgcolor="#99FFCC">&nbsp;<?php echo $form->textField($model,'tot_mul_alf',array('class'=>'span1','value'=>$model->tot_mul_alf <> 0 ?  $model->tot_mul_alf : 0));?></td>
    <td bgcolor="#99FFCC">&nbsp;<?php echo $form->textField($model,'tot_mul_pri',array('class'=>'span1','value'=>$model->tot_mul_pri <> 0 ?  $model->tot_mul_pri : 0));?></td>
    </tr>
  <tr>
-	 <td>Total</td>
+	 <td><span class="aa">Total</span></td>
 	 <td>&nbsp;<?php echo $form->textField($model,'alu_mul_ind',array('class'=>'span1','readonly'=>'readonly','value'=>$model->alu_mul_ind <> 0 ?  $model->alu_mul_ind : 0));?></td>
 	 <td>&nbsp;<?php echo $form->textField($model,'alu_tot_alf',array('class'=>'span1','readonly'=>'readonly','value'=>$model->alu_tot_alf <> 0 ?  $model->alu_tot_alf : 0));?></td>
 	 <td>&nbsp;<?php echo $form->textField($model,'alu_tot_pri',array('class'=>'span1','readonly'=>'readonly','value'=>$model->alu_tot_pri <> 0 ?  $model->alu_tot_pri : 0));?></td>
@@ -224,132 +224,11 @@ table.tableizer-table {
   <?php $this->endWidget();?>
   
   
-  <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
-	'title' => 'Cantidad de Beneficiarios de Servicios de Alimentacion',
-	'headerIcon' => 'icon-th-list',
-	'htmlOptions' => array('class'=>'bootstrap-widget-table')
-));?>
-  </p>
-  <!--  <div id="yw116">
-	<div class="alert in alert-block fade alert-error">
-	 <strong>Importante!</strong> 
-	 Todos los campos con deben contener un valor. Completar con cero '0' si no hay valor en la planilla.
-  	 </div>
-	</div> -->
-  <?php $this->widget(
-    'bootstrap.widgets.TbLabel',
-    array(
-        'type' => 'info',
-        // 'success', 'warning', 'important', 'info' or 'inverse'
-        'label' => 'Importante! Todos los campos con deben contener un valor. Completar con cero "0" si no hay valor en la planilla.',
-    )
-);?>
-  
-  <style type="text/css">
-table.tableizer-table {
-	border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-} 
-.tableizer-table td {
-	padding: 4px;
-	margin: 3px;
-	border: 1px solid #ccc;
-}
-.tableizer-table th {
-	background-color: #104E8B; 
-	color: #FFF;
-	font-weight: bold;
-}
-  </style>
-</p>
-<p>&nbsp; </p>
-<table align="center" class="tableizer-table">
-	  <tr class="tableizer-firstrow">
-			<td width="254" bgcolor="#104E8B"><span class="">CANTIDAD DE BENEFICIARIOS DE SERVICIOS DE ALIMENTACION</span></td>
-			<td width="48" bgcolor="#104E8B" class="">TOTAL</td>
-	  </tr>
-		<tr>
-			<td bgcolor="#FFFFFF">ALMUERZO</td>
-			<td bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_alm_ben',array('class'=>'span1','value'=>$model->tot_alm_ben <> 0 ?  $model->tot_alm_ben : 0 ));?></td>
-	  </tr>
-		<tr>
-			<td bgcolor="#FFFFFF">COPA DE LECHE</td>
-			<td bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_cop_man',array('class'=>'span1','value'=>$model->tot_cop_man <> 0 ?  $model->tot_cop_man : 0 ));?></td>
-	  </tr>
-		<tr>
-			<td bgcolor="#FFFFFF">REFRIGERIO / MERIENDA REFORZADA: </td>
-			<td bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_ref_man',array('class'=>'span1','value'=>$model->tot_ref_man <> 0 ?  $model->tot_ref_man : 0 ));?></td>
-	  </tr>
-		<tr>
-		  <td bgcolor="#FFFFFF">Otros Servicios Alimentarios</td>
-		  <td bgcolor="#99FFCC"><?php echo $form->textField($model,'tot_ref_tar',array('class'=>'span1','value'=>$model->tot_ref_tar <> 0 ?  $model->tot_ref_tar : 0 ));?></td>
-	  </tr>
-	</table>
-
-
-	<p>
-  <?php $this->endWidget(); ?>	
-	  
-	
-	<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
-	'title' => 'Datos de la localizacion',
-	'headerIcon' => 'icon-th-list',
-	'htmlOptions' => array('class'=>'bootstrap-widget-table')
-));?>
-  </p>
-  <div class="control-group">		
-	<div class="span11">    
-    <span class="span5"><?php /*echo $form->textFieldRow($model,'dom_act');?></span>
-    <span class="span5"><?php echo $form->textFieldRow($responsable,'telefono',array("disabled"=>"disabled"));*/?></span>
-   
-    </div>   
-</div>   
-
-<style type="text/css">
-table.tableizer-table {
-	border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-} 
-.tableizer-table td {
-	padding: 4px;
-	margin: 3px;
-	border: 1px solid #ccc;
-}
-.tableizer-table th {
-	background-color: #104E8B; 
-	color: #FFF;
-	font-weight: bold;
-}
-</style>
-
-	<table border="0" align="center" >
-		<tr>
-			<td width="145" bgcolor="#104E8B"><span class="ee">Domicilio</span> <span class="ee">Actualizado:</span></td>
-			<td width="375" bgcolor="#99FFCC"><?php echo $form->textField($model,'dom_act',array('class'=>'span4'));?></td>
-	  </tr>
-		<tr>
-			<td bgcolor="#104E8B" class="ee">Teléfono/s:</td>
-			<td bgcolor="#99FFCC"><?php echo $form->textField($model,'telefono',array('class'=>'span2'));?>
-			</td>
-	  </tr>
-	</table>
-
-	<p>
-	  <?php $this->endWidget();?>
-	  
- <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
-	'title' => 'Datos de ingreso',
-	'headerIcon' => 'icon-th-list',
-	'htmlOptions' => array('class'=>'bootstrap-widget-table')
-));?>
- <div class="control-group">		
-	<div class="span11">    
-    <span class="span5"><?php echo $form->textFieldRow($model,'ingresador');?></span>
-    <span class="span5"><?php echo $form->textFieldRow($responsable,'apellido',array("disabled"=>"disabled"));?></span>
-   
-    </div>   
-</div>   
-<?php $this->endWidget();?>
+ 	<?php echo $this->renderPartial('/ingresador/_bene_datloc_adultos', array(
+		    'model'=>$model,
+			'form'=>$form,
+	)); ?>
+ 
 
 <div class="form-actions" style="text-align: center;">
  	

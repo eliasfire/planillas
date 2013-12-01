@@ -152,7 +152,7 @@ abstract class BasePlanilla extends GxActiveRecord {
 			'anio' => Yii::t('app', 'Anio'),
 			'id_tipo_planilla' => null,
 			'id_establecimiento' => Yii::t('app', 'Id Establecimiento'),
-			'ingresador' => Yii::t('app', 'Ingresador'),
+			'ingresador' => Yii::t('app', 'Confecciono esta planilla:'),
 			'alu_tot_ind' => Yii::t('app', 'Alu Tot Ind'),
 			'tot_ind_alf' => Yii::t('app', 'Tot Ind Alf'),
 			'tot_ind_pri' => Yii::t('app', 'Tot Ind Pri'),
