@@ -117,6 +117,11 @@
 		  		'label'=>'Var Mat',
 		  		'class' => 'miinput'
 		  	),
+		  	'nec_esp_edu'=>array(
+		  		'type'=>'text',
+		  		'label'=>'Nec. Esp.',
+		  		'class' => 'miinput'
+		  	),
 		  	'alu_rep_tot'=>array(
 		  		'type'=>'text',
 		  		'label'=>'Total Rep',
