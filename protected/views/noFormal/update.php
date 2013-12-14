@@ -1,9 +1,4 @@
-<?php
-$this->breadcrumbs=array(
-	'Planillas'=>array('index'),
-	$model->id_planilla=>array('view','id'=>$model->id_planilla),
-	Yii::t('app', 'Update'),
-);?>
+<?php echo $this->renderPartial('/ingresador/_datosglobales'); ?>
 
 <h1>
     Planilla  - Educación No Formal <small><?php echo Yii::t('app', 'Update'); ?> #<?php echo $model->id_planilla ?></small></h1><hr/>
@@ -588,14 +583,14 @@ Yii::app()->getClientScript()->registerScript('myscript38','$(
 	    
  <div class="control-group">		
 	<div class="span11">    
-    <?php // echo $form->errorSummary($model,'Opps!!!', null,array('class'=>'alert alert-error span10')); ?>
+    <?php /* // echo $form->errorSummary($model,'Opps!!!', null,array('class'=>'alert alert-error span10')); ?>
     
     <span class="span5"><?php echo $form->dropdownlistRow($model,'mes', array("marzo" => "Marzo", "septiembre" => "Septiembre"),array("disabled"=>"disabled"));?></span>
     <span class="span4"><?php echo $form->dropdownlistRow($model,'anio', array("2013" => "2013"),array("disabled"=>"disabled","label"=>"Año"));?></span>
     <span class="span5"><?php echo $form->textFieldRow($establecimiento,'nombre',array('class'=>'span4',"disabled"=>"disabled"));?></span>
     <span class="span4"><?php echo $form->textFieldRow($establecimiento,'cue',array('class'=>'span1',"disabled"=>"disabled"));?></span>
     <span class="span5"><?php echo $form->textFieldRow($localizacion,'nombre',array('class'=>'span4',"disabled"=>"disabled"));?></span>
-    <span class="span4"><?php echo $form->textFieldRow($localizacion,'anexo',array('class'=>'span1',"disabled"=>"disabled"));?></span>
+    <span class="span4"><?php echo $form->textFieldRow($localizacion,'anexo',array('class'=>'span1',"disabled"=>"disabled")); */?></span>
  
      </div>   
  </div> 

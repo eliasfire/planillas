@@ -1,9 +1,11 @@
-<?php
-$this->breadcrumbs=array(
-	'Planillas'=>array('index'),
-	$model->id_planilla,
-);
-?>
+<?php echo $this->renderPartial('/ingresador/_datosglobales'); ?>
+
+<style type="text/css">
+.aa {
+	color: #FFF;
+}
+</style>
+
 
 <h1>
     Planilla  - Educación No Formal <small><?php echo Yii::t('app', 'View'); ?> #<?php echo $model->id_planilla ?></small></h1>
@@ -11,8 +13,9 @@ $this->breadcrumbs=array(
 <hr />
 
 <div class="btn-toolbar">
-    <div class="btn-group">
-<?php  
+	<div class="btn-group">
+		<?php  
+			
 		if (Yii::app()->user->checkAccess('Administrador'))
 		{
 			$this->widget("bootstrap.widgets.TbButton", array(
@@ -29,64 +32,71 @@ $this->breadcrumbs=array(
 			));
 		}
 		if ($model->confirmado == 0) {
-                    $this->widget("bootstrap.widgets.TbButton", array(
-                        "label"=>Yii::t('app', 'Update'),'type'=>'warning',
-                        "icon"=>"icon-edit icon-white",
-                        "url"=>array("update","id"=>$model->{$model->tableSchema->primaryKey})
-                    )); }
-                    /*
-                    $this->widget("bootstrap.widgets.TbButton", array(
-                        "label"=>Yii::t('app', 'Create'),
-                        "icon"=>"icon-plus",
-                        "url"=>array("create")
-                    ));*/
-                    $this->widget("bootstrap.widgets.TbButton", array(
-                    		"label"=>Yii::t('app', 'Print'),
-                    		"icon"=>"icon-print",
-                    		"url"=>array("javascript:void(0);return false"),
-                    		"htmlOptions"=>array('onclick'=>'printDiv();return false;'),
-                    		
-                    ));
-                    
-                    if (Yii::app()->user->checkAccess('Administrador'))
-                    {
-                    	if ($model->confirmado == 1) {
-                    	$this->widget('bootstrap.widgets.TbButton', array(
-                    			'label'=>'Desconfirmar Planilla',
-                    			'type'=>'warning',
-                    			'htmlOptions'=>array(
-                    					'onclick'=>'js:bootbox.confirm("¿Esta seguro que desea desconfirmar la planilla?",
-                    					function(confirmed){
-                    					if(confirmed === true)
-                    					{
-                    					$.ajax({
-                    					url: "'.$this->createUrl('noformal/desconfirmar').'",
-                    					dataType: "json",
-                    					data: {
-                    					confirmar: confirmed,
-                    					id: "'.$model->id_planilla.'",
-                    	},
-                    					success: function(data) { window.location="'.Yii::app()->getRequest()->getUrl().'"; }
-                    	})}})'
-                    			),
-                    	));
-                    	}
-                    	
-                    	$this->widget("bootstrap.widgets.TbButton", array(
-	                        "label"=>Yii::t('app', 'Delete'),"type"=>"inverse",
-	                        "type"=>"danger",
-	                        "icon"=>"icon-remove icon-white",
-	                        "htmlOptions"=> array(
-	                            "submit"=>array("delete","id"=>$model->{$model->tableSchema->primaryKey}, "returnUrl"=>Yii::app()->request->getParam("returnUrl")),
-	                            "confirm"=>"¿Desea borrar esta planilla?")
-	                         )
-	                    );
-	                }
+			$this->widget("bootstrap.widgets.TbButton", array(
+					"label"=>Yii::t('app', 'Update'),'type'=>'warning',
+					"icon"=>"icon-edit icon-white",
+					"url"=>array("update","id"=>$model->{$model->tableSchema->primaryKey})
+			));
+		}
+		/*
+		 $this->widget("bootstrap.widgets.TbButton", array(
+		 		"label"=>Yii::t('app', 'Create'),
+		 		"icon"=>"icon-plus",
+		 		"url"=>array("create")
+		 ));
+		$this->widget("bootstrap.widgets.TbButton", array(
+				"label"=>Yii::t('app', 'Print'),
+				"icon"=>"icon-print",
+				"url"=>array("javascript:void(0);return false"),
+				"htmlOptions"=>array('onclick'=>'printDiv();return false;'),
+
+		));*/
+
+		if (Yii::app()->user->checkAccess('Administrador'))
+		{
+			if ($model->confirmado == 1) {
+				$this->widget('bootstrap.widgets.TbButton', array(
+						'label'=>'Desconfirmar Planilla',
+						'type'=>'warning',
+						'htmlOptions'=>array(
+								'onclick'=>'js:bootbox.confirm("¿Esta seguro que desea desconfirmar la planilla?",
+								function(confirmed){
+								if(confirmed === true)
+								{
+								$.ajax({
+								url: "'.$this->createUrl('inicial/desconfirmar').'",
+								dataType: "json",
+								data: {
+								confirmar: confirmed,
+								id: "'.$model->id_planilla.'",
+			},
+								success:  function(data) { window.location="'.Yii::app()->getRequest()->getUrl().'"; }
+			})}})'
+						),
+				));
+			}
+
+			$this->widget("bootstrap.widgets.TbButton", array(
+					"label"=>Yii::t('app', 'Delete'),"type"=>"inverse",
+					"type"=>"danger",
+					"icon"=>"icon-remove icon-white",
+					"htmlOptions"=> array(
+							"submit"=>array("delete","id"=>$model->{$model->tableSchema->primaryKey}, "returnUrl"=>Yii::app()->request->getParam("returnUrl")),
+							"confirm"=>"¿Desea borrar esta planilla?")
+			)
+			);
+		}
+			
+		$this->widget("bootstrap.widgets.TbButton", array(
+	                		"label"=>Yii::t('app', 'Exportar a PDF'),'type' => 'danger',
+	                		"icon"=>"icon-edit icon-white",
+	                		"url"=>array("imprimirLocalizacion")
+	                ));
 				?>
 
-    
+
 	</div>
-	
+
 </div>
 <?php if ($model->confirmado == 0) {?>
 <div id="yw116"><div class="alert in alert-block fade alert-error"><strong>Importante!</strong> Una vez CONFIRMADA la planilla no se podra ACTUALIZAR.</div></div>
@@ -95,14 +105,15 @@ $this->breadcrumbs=array(
 <?php }?>
 
 <div class='printableArea'>
-<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+<p>
+  <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Datos de la Planilla',
 	'headerIcon' => 'icon-th-list',
 	// when displaying a table, if we include bootstra-widget-table class
 	// the table will be 0-padding to the box
 	'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
-<?php $this->widget('bootstrap.widgets.TbDetailView',array(
+  <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
 	'id_planilla',
@@ -142,17 +153,17 @@ $this->breadcrumbs=array(
 	
 		
 )); ?>
-<?php $this->endWidget();?>
-
-
-<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+  <?php $this->endWidget();?>
+  
+  
+  <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Detalle de la Planilla',
 	'headerIcon' => 'icon-th-list',
 	// when displaying a table, if we include bootstra-widget-table class
 	// the table will be 0-padding to the box
 	'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
-<?php 
+  <?php 
 $this->widget('bootstrap.widgets.TbGroupGridView', array(
     'type'=>'striped bordered condensed',
 	'dataProvider' => NoFormal::model()->getGridDataProvider($model->id_planilla),
@@ -216,9 +227,9 @@ $this->widget('bootstrap.widgets.TbGroupGridView', array(
 	),
 	'mergeColumns' => array('id_localizacion','id_nivel')
 ));?>
-<?php $this->endWidget();?>
-
-<style type="text/css">
+  <?php $this->endWidget();?>
+  
+  <style type="text/css">
 table.tableizer-table {
 	border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;
 
@@ -229,47 +240,50 @@ table.tableizer-table {
 	border: 1px solid #ccc;
 }
 .tableizer-table th {
-	background-color: #c3d9ff; 
-	color: rgb(2, 2, 2);
+	/*background-color: #c3d9ff; 
+	color: rgb(2, 2, 2);*/
 	font-weight: bold;
 }
 </style>
-
-<?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+  
+  <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Cantidad de secciones / divisiones',
 	'headerIcon' => 'icon-th-list',
 	'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
-	
+</p>
+<p>&nbsp;</p>
 <table align="center" class="tableizer-table">
-<tr class="tableizer-firstrow">
+  <tr class="tableizer-firstrow">
 	<th>&nbsp;</th>
-	<th>Totales</th>
-	<th>Varones</th>
-	<th>Mujeres</th>
+	<th bgcolor="#0066CC" class="aa">Totales</th>
+	<th bgcolor="#0066CC" class="aa">Varones</th>
+	<th bgcolor="#0066CC" class="aa">Mujeres</th>
 	</tr>
  <tr>
  <td><strong>Total Alumnos (debe contar a cada alumna una sola vez) </strong></td>
-   <td bgcolor="#CCFFFF">&nbsp;<?php echo $model->tot_alu_act;?></td>
-   <td bgcolor="#CCFFFF">&nbsp;<?php echo $model->tot_act_var ;?></td>
-   <td bgcolor="#CCFFFF">&nbsp;<?php echo $model->tot_act_muj ;?></td>
+   <td>&nbsp;<?php echo $model->tot_alu_act;?></td>
+   <td>&nbsp;<?php echo $model->tot_act_var ;?></td>
+   <td>&nbsp;<?php echo $model->tot_act_muj ;?></td>
    </tr>
  <tr>
    <td><strong>Alumnos con actividades obligatorias </strong></td>
-   <td bgcolor="#CCFFFF">&nbsp;<?php echo $model->alu_obl_tot ;?></td>
+   <td>&nbsp;<?php echo $model->alu_obl_tot ;?></td>
    <td bgcolor="#CCFFFF">&nbsp;<?php echo $model->alu_obl_var ;?></td>
    <td bgcolor="#CCFFFF">&nbsp;<?php echo $model->alu_obl_muj ;?></td>
    </tr>
  <tr>
 	 <td><strong>Alumnos en actividades optativas/voluntarias</strong></td>
 	 <td>&nbsp;<?php echo $model->alu_opt_tot ;?></td>
-	 <td>&nbsp;<?php echo $model->alu_opt_var ;?></td>
-	 <td>&nbsp;<?php echo $model->alu_opt_muj ;?></td>
+	 <td bgcolor="#CCFFFF">&nbsp;<?php echo $model->alu_opt_var ;?></td>
+	 <td bgcolor="#CCFFFF">&nbsp;<?php echo $model->alu_opt_muj ;?></td>
     </tr>
  </table>
-<?php $this->endWidget();?>
- 
-
+<p>
+  <?php $this->endWidget();?>
+  
+  
+</p>
 <div class="form-actions" style="text-align: center;">
  	
 	<?php if ($model->confirmado == 0) {

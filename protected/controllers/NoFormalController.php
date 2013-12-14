@@ -43,43 +43,30 @@ class NoFormalController extends GxController {
 		$id=Yii::app()->user->id;
 		
 		$establecimientousuario = UsuEstPla::model()->find('id_usuario = :id_uno',array(':id_uno'=>$id));
-		/*
-		if ($establecimientousuario->id_tipo_planilla == 1){$this->redirect(array('inicial/create'));}
-		if ($establecimientousuario->id_tipo_planilla == 2){$this->redirect(array('adulto/admin'));	}
-		if ($establecimientousuario->id_tipo_planilla == 3){$this->redirect(array('serviciocomplementario/admin'));		}
-		*/
-		
 		$establecimiento = Establecimiento::model()->find('id_establecimiento = :id_uno',array(':id_uno'=>Yii::app()->getSession()->get('id_establecimiento')));
-        $responsable = Responsable::model()->find('id_responsable = :id_est', array(':id_est'=>$establecimiento->id_responsable));
-        $localizacion = Localizacion::model()->find('id_localizacion = :id_uno',array(':id_uno'=>$establecimientousuario->id_localizacion));
-        
+		$localizacion = Localizacion::model()->find('id_localizacion = :id_uno',array(':id_uno'=>Yii::app()->getSession()->get('id_localizacion')));
+		
+		$responsable = Responsable::model()->find('id_responsable = :id_est', array(':id_est'=>$establecimiento->id_responsable));
+		      
         $model = new Planilla('noformal');
         
 		$detallePlanilla = new NoFormal;
 		
 		$validatedDetalles = array();  
-		/*
-		echo "<PRE>";
+		
+		/*echo "<PRE>";
 		print_r($_POST);
 		echo "</PRE>";*/
 
 		if(isset($_POST['Planilla']))
 		{
+			$model->setAttributes($_POST['Planilla']);
+			
 			$model->id_establecimiento=Yii::app()->getSession()->get('id_establecimiento');
-			$model->id_localizacion=$localizacion->id_localizacion;
+			$model->id_localizacion=Yii::app()->getSession()->get('id_localizacion');
 			$model->mes= Yii::app()->getSession()->get('mesvigente');
 			$model->anio= Yii::app()->getSession()->get('aniovigente');
 			$model->id_tipo_planilla=4;
-			$model->tot_alu_act =$_POST['Planilla']['tot_alu_act'];
-			$model->tot_act_var =$_POST['Planilla']['tot_act_var'] ;
-			$model->tot_act_muj =$_POST['Planilla']['tot_act_muj'] ;
-			$model->alu_obl_tot =$_POST['Planilla']['alu_obl_tot'];
-			$model->alu_obl_var =$_POST['Planilla']['alu_obl_var'] ;
-			$model->alu_obl_muj =$_POST['Planilla']['alu_obl_muj'] ;
-			$model->alu_opt_tot =$_POST['Planilla']['alu_opt_tot'] ;
-			$model->alu_opt_var =$_POST['Planilla']['alu_opt_var'] ;
-			$model->alu_opt_muj =$_POST['Planilla']['alu_opt_muj'] ;
-			$model->ingresador =$_POST['Planilla']['ingresador'] ;
 			$model->confirmado = 0 ;
 			
 			$detailOK = MultiModelForm::validate($detallePlanilla,$validatedDetalles,$deleteItems);
@@ -120,13 +107,11 @@ class NoFormalController extends GxController {
 		
 		$model=$this->loadModel($id,'Planilla');
 		
-		Yii::app()->user->id=Yii::app()->user->id;
 		$establecimientousuario = UsuEstPla::model()->find('id_usuario = :id_uno',array(':id_uno'=>Yii::app()->user->id));
 		$establecimiento = Establecimiento::model()->find('id_establecimiento = :id_uno',array(':id_uno'=>Yii::app()->getSession()->get('id_establecimiento')));
 		$responsable = Responsable::model()->find('id_responsable = :id_est', array(':id_est'=>$establecimiento->id_responsable));
 		$localizacion = Localizacion::model()->find('id_localizacion = :id_uno',array(':id_uno'=>$model->id_localizacion));
-		 
-				
+		Yii::app()->getSession()->add('id_localizacion',$localizacion->id_localizacion);	
 		
 		if ($model->confirmado == 1) {
 			   Yii::app()->user->setFlash('error', '<strong>Planilla ya confirmada!</strong> No se puede modificar.');
@@ -138,17 +123,10 @@ class NoFormalController extends GxController {
 
 		if(isset($_POST['Planilla']))
 		{
-			$model->tot_alu_act =$_POST['Planilla']['tot_alu_act'];
-			$model->tot_act_var =$_POST['Planilla']['tot_act_var'] ;
-			$model->tot_act_muj =$_POST['Planilla']['tot_act_muj'] ;
-			$model->alu_obl_tot =$_POST['Planilla']['alu_obl_tot'];
-			$model->alu_obl_var =$_POST['Planilla']['alu_obl_var'] ;
-			$model->alu_obl_muj =$_POST['Planilla']['alu_obl_muj'] ;
-			$model->alu_opt_tot =$_POST['Planilla']['alu_opt_tot'] ;
-			$model->alu_opt_var =$_POST['Planilla']['alu_opt_var'] ;
-			$model->alu_opt_muj =$_POST['Planilla']['alu_opt_muj'] ;
+			$model->setAttributes($_POST['Planilla']);
+			/*
 			$model->ingresador =$_POST['Planilla']['ingresador'] ;
-			$model->confirmado = 0 ;
+			$model->confirmado = 0 ;*/
 					
 			if(!isset($_POST['NoFormal']))
 			{
@@ -168,7 +146,7 @@ class NoFormalController extends GxController {
 				MultiModelForm::save($detallePlanilla,$validatedDetalles,$deletedMembers,$masterValues) &&
 				$model->save()
 				)
-				$this->redirect(array('admin','id'=>$model->id_planilla));
+				 $this->redirect(array('/ingresador/admin'));
 		}
 
 		$this->render('update',array(

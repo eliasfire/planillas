@@ -5,6 +5,12 @@
 .tableizer-table tr td {
 	font-weight: bold;
 }
+.aa {
+	color: #FFF;
+}
+.aa {
+	color: #FFF;
+}
 </style>
 
 <div class="form wide">
@@ -122,8 +128,8 @@ table.tableizer-table {
 	border: 1px solid #ccc;
 }
 .tableizer-table th {
-	background-color: #c3d9ff; 
-	color: rgb(2, 2, 2);
+	/* background-color: #c3d9ff; 
+	color: rgb(2, 2, 2);*/
 	font-weight: bold;
 }
 </style>
@@ -139,41 +145,44 @@ table.tableizer-table {
 	 Todos los campos con deben contener un valor. Completar con cero '0' si no hay valor en la planilla.
   	 </div>
 	</div>
-	
-<table align="center" class="tableizer-table">
-<tr class="tableizer-firstrow">
-	<th>&nbsp;</th>
-	<th>Totales</th>
-	<th>Varones</th>
-	<th>Mujeres</th>
-	</tr>
- <tr>
- <td>Total Alumnos (debe contar a cada alumna una sola vez)   </td>
-   <td bgcolor="#CCFFFF">&nbsp;<?php echo $form->textField($model,'tot_alu_act',array('class'=>'span1'));?></td>
-   <td bgcolor="#CCFFFF">&nbsp;<?php echo $form->textField($model,'tot_act_var',array('class'=>'span1'));?></td>
-   <td bgcolor="#CCFFFF">&nbsp;<?php echo $form->textField($model,'tot_act_muj',array('class'=>'span1'));?></td>
-   </tr>
- <tr>
-   <td>Alumnos con actividades obligatorias   </td>
-   <td bgcolor="#CCFFFF">&nbsp;<?php echo $form->textField($model,'alu_obl_tot',array('class'=>'span1'));?></td>
-   <td bgcolor="#CCFFFF">&nbsp;<?php echo $form->textField($model,'alu_obl_var',array('class'=>'span1'));?></td>
-   <td bgcolor="#CCFFFF">&nbsp;<?php echo $form->textField($model,'alu_obl_muj',array('class'=>'span1'));?></td>
-   </tr>
- <tr>
-	 <td><p>Alumnos en actividades optativas/voluntarias</p></td>
-	 <td>&nbsp;<?php echo $form->textField($model,'alu_opt_tot',array('class'=>'span1'));?></td>
-	 <td>&nbsp;<?php echo $form->textField($model,'alu_opt_var',array('class'=>'span1'));?></td>
-	 <td>&nbsp;<?php echo $form->textField($model,'alu_opt_muj',array('class'=>'span1'));?></td>
-    </tr>
- </table>
-<?php $this->endWidget();?>
-
- <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
+  <p>&nbsp;</p>
+  <table align="center" class="tableizer-table">
+    <tr class="tableizer-firstrow">
+    <th>&nbsp;</th>
+    <th bgcolor="#0066CC" class="aa">TOTAL</th>
+    <th bgcolor="#0066CC" class="aa">Varones</th>
+    <th bgcolor="#0066CC" class="aa">Mujeres</th>
+  </tr>
+  <tr>
+    <td>TOTAL ALUMNOS(debe contar a cada alumna una sola vez)</td>
+    <td><?php echo $form->textField($model,'tot_alu_act',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_alu_act <> 0 ?  $model->tot_alu_act : 0 ));?></td>
+    <td><?php echo $form->textField($model,'tot_act_var',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_act_var <> 0 ?  $model->tot_act_var : 0 ));?></td>
+    <td><?php echo $form->textField($model,'tot_act_muj',array('class'=>'span1','readonly'=>'readonly','value'=>$model->tot_act_muj <> 0 ?  $model->tot_act_muj : 0 ));?></td>
+  </tr>
+  <tr>
+    <td>Alumnos con actividades obligatorias </td>
+    <td><?php echo $form->textField($model,'alu_obl_tot',array('class'=>'span1','readonly'=>'readonly','value'=>$model->alu_obl_tot <> 0 ?  $model->alu_obl_tot : 0 ));?></td>
+    <td bgcolor="#99FFCC"><?php echo $form->textField($model,'alu_obl_var',array('class'=>'span1','value'=>$model->alu_obl_var <> 0 ?  $model->alu_obl_var : 0 ));?></td>
+    <td bgcolor="#99FFCC"><?php echo $form->textField($model,'alu_obl_muj',array('class'=>'span1','value'=>$model->alu_obl_muj <> 0 ?  $model->alu_obl_muj : 0 ));?></td>
+  </tr>
+  <tr>
+    <td>Alumnos en actividades optativas/voluntarias</td>
+    <td><?php echo $form->textField($model,'alu_opt_tot',array('class'=>'span1','readonly'=>'readonly','value'=>$model->alu_opt_tot <> 0 ?  $model->alu_opt_tot : 0 ));?></td>
+    <td bgcolor="#99FFCC"><?php echo $form->textField($model,'alu_opt_var',array('class'=>'span1','value'=>$model->alu_opt_var <> 0 ?  $model->alu_opt_var : 0 ));?></td>
+    <td bgcolor="#99FFCC"><?php echo $form->textField($model,'alu_opt_muj',array('class'=>'span1','value'=>$model->alu_opt_muj <> 0 ?  $model->alu_opt_muj : 0 ));?></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>
+  <?php $this->endWidget();?>
+  
+  <?php $box = $this->beginWidget('bootstrap.widgets.TbBox', array(
 	'title' => 'Datos de ingreso',
 	'headerIcon' => 'icon-th-list',
 	'htmlOptions' => array('class'=>'bootstrap-widget-table')
 ));?>
- <div class="control-group">		
+</p>
+<div class="control-group">		
 	<div class="span11">    
     <span class="span5"><?php echo $form->textFieldRow($model,'ingresador');?></span>
     <span class="span5"><?php /*echo $form->textFieldRow($responsable,'apellido',array("disabled"=>"disabled"));*/?></span>
@@ -182,7 +191,7 @@ table.tableizer-table {
 </div>   
 <?php $this->endWidget();?>
 
-<div class="form-actions">
+<div class="form-actions" style="text-align: center;">
  	
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',
@@ -204,3 +213,91 @@ table.tableizer-table {
   </div>
 <?php $this->endWidget(); ?>
 </div>
+
+<script type="text/javascript">
+$(document).on('ready',function(){
+	$('#id_detalle').trigger("click");
+	});
+</script>
+
+<script type="text/javascript">
+$('input').keydown( function(e) {
+    var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
+    if(key == 13) {
+        e.preventDefault();
+        var inputs = $(this).closest('form').find(':input:visible');
+        inputs.eq( inputs.index(this)+ 1 ).focus();
+    }
+});
+</script>
+
+<script>
+function SumarGenero2(){
+var a=$('#Planilla_alu_obl_var').val();
+var b=$('#Planilla_alu_opt_var').val();
+if(a==''){a=0;}
+if(b==''){b=0;}
+var total=parseFloat(a) + parseFloat(b);
+$('#Planilla_tot_act_var').val(total);
+}
+$('#Planilla_alu_obl_var').keyup(SumarGenero2);
+$('#Planilla_alu_opt_var').keyup(SumarGenero2);
+</script>
+
+<script>
+function SumarGenero2(){
+var a=$('#Planilla_alu_obl_muj').val();
+var b=$('#Planilla_alu_opt_muj').val();
+if(a==''){a=0;}
+if(b==''){b=0;}
+var total=parseFloat(a) + parseFloat(b);
+$('#Planilla_tot_act_muj').val(total);
+}
+$('#Planilla_alu_obl_muj').keyup(SumarGenero2);
+$('#Planilla_alu_opt_muj').keyup(SumarGenero2);
+</script>
+
+<script>
+function SumarGenero2(){
+var a=$('#Planilla_alu_obl_var').val();
+var b=$('#Planilla_alu_obl_muj').val();
+if(a==''){a=0;}
+if(b==''){b=0;}
+var total=parseFloat(a) + parseFloat(b);
+$('#Planilla_alu_obl_tot').val(total);
+}
+$('#Planilla_alu_obl_var').keyup(SumarGenero2);
+$('#Planilla_alu_obl_muj').keyup(SumarGenero2);
+</script>
+
+<script>
+function SumarGenero2(){
+var a=$('#Planilla_alu_opt_var').val();
+var b=$('#Planilla_alu_opt_muj').val();
+if(a==''){a=0;}
+if(b==''){b=0;}
+var total=parseFloat(a) + parseFloat(b);
+$('#Planilla_alu_opt_tot').val(total);
+}
+$('#Planilla_alu_opt_var').keyup(SumarGenero2);
+$('#Planilla_alu_opt_muj').keyup(SumarGenero2);
+</script>
+
+<script>
+function SumarGenero2(){
+var a=$('#Planilla_alu_obl_var').val();
+var b=$('#Planilla_alu_obl_muj').val();
+var c=$('#Planilla_alu_opt_var').val();
+var d=$('#Planilla_alu_opt_muj').val();
+if(a==''){a=0;}
+if(b==''){b=0;}
+if(c==''){c=0;}
+if(d==''){d=0;}
+var total=parseFloat(a) + parseFloat(b) + parseFloat(c) + parseFloat(d);
+$('#Planilla_tot_alu_act').val(total);
+}
+$('#Planilla_alu_obl_var').keyup(SumarGenero2);
+$('#Planilla_alu_obl_muj').keyup(SumarGenero2);
+$('#Planilla_alu_opt_var').keyup(SumarGenero2);
+$('#Planilla_alu_opt_muj').keyup(SumarGenero2);
+</script>
